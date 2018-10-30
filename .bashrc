@@ -6,11 +6,14 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias ls='ls --color=auto'
+# Load aliases
+source ~/.aliases
 
-# Set GoPath
-export GOPATH="/home/danny/Code/go"
-export PATH="$GOPATH/bin:$PATH;"
+# Load functions
+source ~/.functions
+
+# Load vars
+source ~/.vars
 
 # Pretty bash prompt
 source ~/.bash_prompt
@@ -34,4 +37,5 @@ done;
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
 
-
+# Source autojump - https://github.com/wting/autojump
+[ -e "/etc/profile.d/autojump.bash" ] && source /etc/profile.d/autojump.bash
