@@ -9,6 +9,7 @@ Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-vinegar'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-syntastic/syntastic'
+Plugin 'alvan/vim-closetag'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -63,6 +64,9 @@ set backupskip=/tmp/*,/private/tmp/*
 
 " store swap files in /tmp instead of wd
 set directory=/tmp
+
+" enable closetag in these files
+let g:closetag_filenames = '*.html,*.php'
 
 " run GoImport on save
 let g:go_fmt_command = "goimports"
