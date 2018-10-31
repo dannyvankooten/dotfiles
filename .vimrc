@@ -12,6 +12,7 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'alvan/vim-closetag'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-easytags'
+Plugin 'mileszs/ack.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -81,3 +82,8 @@ let g:easytags_async = 1
 
 " use a project specific tag file first
 set tags=./.tags;,~/.vimtags
+
+" Use ag (silver searcher) instead of Ack
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
