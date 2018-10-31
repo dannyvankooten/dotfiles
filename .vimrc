@@ -10,6 +10,8 @@ Plugin 'tpope/vim-vinegar'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'alvan/vim-closetag'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-easytags'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -53,6 +55,9 @@ set wildmode=longest:list,full
 " mouse
 set mouse=a
 
+" don't move to start of newline but keep indentation level
+set autoindent
+
 " share system clipboard
 set clipboard=unnamed
 
@@ -70,3 +75,9 @@ let g:closetag_filenames = '*.html,*.php'
 
 " run GoImport on save
 let g:go_fmt_command = "goimports"
+
+" update tags asynchronously
+let g:easytags_async = 1
+
+" use a project specific tag file first
+set tags=./.tags;,~/.vimtags
