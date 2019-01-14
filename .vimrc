@@ -11,7 +11,6 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'alvan/vim-closetag'
 Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-easytags'
 Plugin 'mileszs/ack.vim'
 
 " All of your Plugins must be added before the following line
