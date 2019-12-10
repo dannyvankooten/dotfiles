@@ -1,0 +1,70 @@
+#!/bin/bash
+
+# Pulls languages from Transifex and creates .mo files
+# Usage: dvk-build languages
+languages()
+{
+	if [[ -d "languages" ]]; then
+		# Build .pot file
+		if [[ $(command -v wp 2>&1) ]]; then
+			wp i18n make-pot . --skip-js 
+		fi;
+
+
+		# Build .mo files
+		for file in `find languages/. -name "*.po"` ; do msgfmt -o ${file/.po/.mo} $file; done
+	fi;
+
+	# Add to Git
+	if [[ -e ".git" ]]; then
+		git add languages/.
+		git commit -m "updated languages"
+	fi;
+}
+
+# Builds assets using Gulp or Grunt
+# Usage: dvk-build assets
+assets()
+{
+	# Install NPM deps
+	if [ -e package.json ] && [ ! -d node_modules ]; then
+		npm install
+	fi
+
+	# Run Gulp
+	if [ -e gulpfile.js ]; then
+		npx gulp
+	fi
+
+	# Run Grunt
+	if [ -e Gruntfile.js ];	then
+		npx grunt
+	fi
+
+	# Run webpack
+	if [ -e webpack.config.js ]; then
+		NODE_ENV=production npx webpack
+	fi
+
+	if [[ -e ".git" ]]; then
+		git add assets/ 
+		git add **/assets/
+		git commit -m "updated assets"
+	fi;
+}
+
+# Creates the Composer autoloader
+# Usage: dvk-build autoloader
+autoloader()
+{
+	# Run Composer
+	if [ -e composer.json ]; then
+		# Make sure dev-dependencies are not installed
+		composer update --no-dev --prefer-dist --optimize-autoloader
+
+		git add vendor/
+		git commit -m "updated autoloader"
+	fi
+}
+
+$1

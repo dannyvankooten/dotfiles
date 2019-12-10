@@ -1,15 +1,21 @@
+#!/usr/bin/env bash
 
-# Load aliases
-source ~/.aliases
+if [[ -z "$DOTFILES_DIR" ]]; then
+	echo "DOTFILES_DIR variable is not set. Set it manually or use bootstrap.sh to install these dotfiles."
+	exit 1;
+fi;
 
-# Load functions
-source ~/.functions
+# Aliases
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias diff='diff --color=auto'
+alias dmesg="dmesg --color=always"
 
-# Load vars
-source ~/.vars
+# Environment vars
+PATH="$PATH:$DOTFILES_DIR/bin"
 
 # Pretty bash prompt
-source ~/.bash_prompt
+source "$DOTFILES_DIR/bash/bash_prompt"
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob;
@@ -29,9 +35,6 @@ shopt -s cdspell;
 for option in autocd globstar; do
 	shopt -s "$option" 2> /dev/null;
 done;
-
-# .env file
-[ -e "$HOME/.env" ] && source ~/.env
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;

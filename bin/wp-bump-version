@@ -1,0 +1,50 @@
+#!/usr/bin/env php
+<?php
+
+global $argv, $argc;
+
+#
+# Bumps a version number
+# Usage: wp-bump-version $VERSION (from plugin directory)
+# Example: wp-bump-version 1.0.0
+#
+# This bumps the version number to the specified version in the following files.
+# - Stable Tag: ... in readme.txt
+# - define( '..._version', '...' ) in main plugin file
+# - "version": "..." in all .json files
+#
+
+if ($argc < 2) {
+    echo "At least 1 parameter expected. $argc found.";
+    exit();
+}
+
+$version = $argv[1];
+
+function replace_in_file($search, $replace, $file) {
+    if (false === file_exists($file)) {
+        return;
+    }
+
+    $content = file_get_contents($file);
+    $content = preg_replace($search, $replace, $content);
+    if (null === $content) {
+        throw new Exception("Error replacing $search with $replace in $file");
+    }
+    file_put_contents($file, $content);
+}
+
+replace_in_file('/Stable tag: .+/', "Stable tag: $version", 'readme.txt');
+
+$php_files = glob("*.php");
+foreach ($php_files as $file) {
+    replace_in_file('/Version: .+/', "Version: $version", $file);
+    replace_in_file('/(define\( ?\'\w+_VERSION\' ?, ?\').+?(\' ?\);)/', '${1}' . $version . '${2}', $file);
+}
+
+replace_in_file('/"version": ?".+"/', sprintf('"version": "%s"', $version), 'info.json');
+
+if (file_exists('.git')) {
+    exec('git add readme.txt info.json ' . join(' ', $php_files));
+    exec("git commit -m \"Bump version to v$version\"");
+}

@@ -1,0 +1,32 @@
+#!/bin/bash
+
+#
+# Bumps a version number
+# Usage: wp-bump-version $VERSION (from plugin directory)
+# Example: wp-bump-version 1.0.0
+#
+# This bumps the version number to the specified version in the following files.
+# - Stable Tag: ... in readme.txt
+# - define( '..._version', '...' ) in main plugin file
+# - "version": "..." in all .json files
+#
+
+# Require at least 1 parameter: Version
+if [ "$#" -lt 1 ]; then
+    echo "At least 1 parameter expected, $# found"
+    exit 1;
+fi
+
+VERSION=$1
+
+# Bump version in readme.txt
+sed -i.bak "s/Tested up to: .*/Tested up to: $VERSION/g" readme.txt
+
+# Remove backup files
+rm *.bak
+
+# Add change to Git
+if [[ -d ".git" ]]; then
+   git add readme.txt
+   git commit -m "Update tested WP version to v$VERSION"
+fi;

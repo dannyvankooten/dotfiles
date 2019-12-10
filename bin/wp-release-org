@@ -1,0 +1,116 @@
+#!/bin/bash
+PACKAGE=$1
+
+#
+# Publish plugin package to WordPress.org
+#
+# Usage: wp-release-org $PACKAGE
+# Example: wp-release-org plugin.zip
+#
+# This takes a .zip package and then does the following
+#
+# - Extracts plugin slug & version number from package
+# - Checkout or update SVN repository
+# - Add changes to trunk
+# - Create version tag
+# - Commit back to WordPress.org SVN repository
+#
+
+# Require at least 1 parameter: Package
+if [ "$#" -lt 1 ]; then
+    echo "1 parameters expected, $# found"
+    exit 1;
+fi
+
+# Find package
+if [[ ! -e "$PACKAGE" ]] ; then
+	printf "Package $PACKAGE does not exist. \n\nRun wp-plugin-package on the Git folder to create it.\n";
+	exit 1;
+fi;
+
+if [[ ! "$PACKAGE" =~ \.zip$ ]]; then
+	printf "Package $PACKAGE does not look like a ZIP file.\n";
+	exit 1;
+fi;
+
+# Unzip to tmp location
+echo "Unzipping package."
+rm -rf /tmp/plugin
+unzip -o "$PACKAGE" -d /tmp/plugin > /dev/null
+cd /tmp/plugin/*
+
+# find name & version number
+PLUGIN_DIR="$PWD"
+NAME=${PWD##*/}
+VERSION=$(cat *.php | grep "^Version: \(.*\)" | tr ' ' '\n' | tail -1)
+
+if [[ -z "$VERSION" ]]; then
+	echo "Unable to find version number - is the package corrupt?"
+	exit 1;
+fi;
+
+# Print some info
+echo "Plugin: $NAME";
+echo "Version: $VERSION";
+printf "\nProceed? (y): "
+read CONFIRM
+if [ "$CONFIRM" != "y" ]; then
+	exit 1;
+fi;
+
+# Get ready for SVN checkout
+mkdir -p "$HOME/.local/share/wp-plugins-svn"
+SVN_DIR="$HOME/.local/share/wp-plugins-svn/$NAME";
+SVN_REPO="http://plugins.svn.wordpress.org/$NAME";
+
+# Checkout SVN folder structure
+echo "Testing if local SVN repository exists in $SVN_DIR";
+if [[ -d $SVN_DIR ]]; then
+	echo "Success!";
+else
+	echo "Unexisting local SVN repository.";
+	echo "Checking out $SVN_REPO.."
+	svn checkout --depth immediates "$SVN_REPO" "$SVN_DIR"  || { echo "Could not checkout $SVN_REPO"; exit 1; }
+fi;
+
+# Traverse into local SVN repo
+cd "$SVN_DIR";
+
+# Make sure SVN matches
+svn upgrade
+
+# Update trunk
+echo "Updating trunk"
+svn update trunk --set-depth infinity
+
+# Add our changes to ./trunk
+echo "Emptying current trunk..";
+rm -r trunk/*
+
+echo "Copying over new trunk.."
+cp -r $PLUGIN_DIR/. trunk
+
+# Remove locally deleted files
+echo "Removing locally deleted files from SVN.."
+svn st | grep ^! | awk '{print " --force "$2}' | xargs svn rm
+
+# Add existing & new files to SVN
+echo "Adding changes to SVN..."
+svn add . --force
+
+# Show status & ask for confirmation
+svn status
+
+printf "\nPush $NAME v$VERSION to WordPress.org? (y)"
+read CONFIRM
+if [[ "$CONFIRM" != "y" ]]; then
+	exit 1;
+fi;
+
+# Push to .org
+svn commit -m "v$VERSION"
+
+# Copy trunk to ./tags/VERSION
+echo "Creating SVN tag: tags/$VERSION";
+svn copy trunk "tags/$VERSION"
+svn commit -m "Tag v$VERSION";

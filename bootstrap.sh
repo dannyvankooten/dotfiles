@@ -1,19 +1,23 @@
 #!/usr/bin/env bash
 
-cd "$(dirname "${BASH_SOURCE}")";
-
-git pull origin master;
-
 function doIt() {
-	rsync --exclude ".git/" \
-		--exclude ".gitmodules" \
-		--exclude ".DS_Store" \
-		--exclude ".osx" \
-		--exclude "bootstrap.sh" \
-		--exclude "README.md" \
-		--exclude "LICENSE-MIT.txt" \
-		-avh --no-perms . ~;
+	# Put Bash config files into place
+	cp "bash/bashrc" ~/.bashrc 
+
+	# Add PWD to ~/.bash_profile as DOTFILES_DIR so we can use it to reference other files from this directory
+	echo -e "$(head -n 1 bash/bash_profile)\nDOTFILES_DIR=$PWD\n\n$(tail -n +2 bash/bash_profile)" > ~/.bash_profile
+
+	# Source our new bash file
 	source ~/.bash_profile;
+
+	# Copy Vim config file
+	cp "$PWD/vim/vimrc" ~/.vimrc 
+
+	# Copy Vundle directory (to manage vim plugins)
+	cp -r "$PWD/vim" ~/.vim
+
+	# Copy git configuration
+	cp git/gitconfig ~/.gitconfig
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then

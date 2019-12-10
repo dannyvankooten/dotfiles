@@ -1,6 +1,0 @@
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-alias diff='diff --color=auto'
-alias todoist='~/Apps/Todoist/todoist &'
-alias dmesg="dmesg --color=always"
-alias dup="nohup gnome-terminal --working-directory $PWD >&/dev/null"
