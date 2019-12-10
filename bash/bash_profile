@@ -13,7 +13,7 @@ alias dmesg="dmesg --color=always"
 
 # Environment vars
 PATH="$PATH:$DOTFILES_DIR/bin"
-PATH="$PATH:/home/danny/.local/bin"
+PATH="$PATH:$HOME/.local/bin"
 
 # Pretty bash prompt
 source "$DOTFILES_DIR/bash/bash_prompt"
