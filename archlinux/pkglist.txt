@@ -1,10 +1,8 @@
 accerciser
 adobe-source-code-pro-fonts
 amd-ucode
-android-studio
 ansible
 autogen
-autojump
 automake
 baobab
 bash
@@ -94,7 +92,6 @@ gnome-weather
 gnu-free-fonts
 gnu-netcat
 go
-google-chrome
 gpicview
 grep
 grilo-plugins
@@ -136,7 +133,6 @@ lxdm
 lxhotkey
 lxinput
 lxlauncher
-lxmusic
 lxpanel
 lxrandr
 lxsession
@@ -161,9 +157,7 @@ npm
 nss-mdns
 ntp
 openbox
-opera-legacy
 orca
-package-query
 pacman
 pass
 patch
@@ -196,14 +190,11 @@ python2-yaml
 quadrapassel
 reiserfsprogs
 rsync
-rtl8812au-dkms-git
 rtorrent
 ruby-bundler
-rygel
 s-nail
 sed
 shadow
-siege
 simple-scan
 sqlitebrowser
 sshpass
@@ -220,14 +211,12 @@ tali
 tar
 texinfo
 the_silver_searcher
-todoist-electron
 totem
 tracker
 tracker-miners
 ttf-croscore
 ttf-dejavu
 ttf-droid
-ttf-ms-fonts
 ttf-roboto
 ufw
 usbutils
@@ -238,8 +227,6 @@ vino
 weechat
 wget
 which
-woeusb
-wrk
 xdg-user-dirs-gtk
 xf86-input-keyboard
 xf86-input-mouse
