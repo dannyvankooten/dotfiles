@@ -20,6 +20,10 @@ alias dmesg="dmesg --color=always"
 PATH="$PATH:$DOTFILES_DIR/bin"
 PATH="$PATH:$HOME/.local/bin"
 
+if [[ -d "$HOME/.gem/ruby/2.6.0/bin" ]]; then
+	PATH="$PATH:$HOME/.gem/ruby/2.6.0/bin"
+fi;
+
 # Pretty bash prompt
 source "$DOTFILES_DIR/bash/bash_prompt"
 
