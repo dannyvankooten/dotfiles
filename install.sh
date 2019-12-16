@@ -10,10 +10,13 @@ function doIt() {
 	# Source our new bash file
 	source ~/.bash_profile;
 
-	# Copy Vim config file
-	cp "$PWD/vim/vimrc" ~/.vimrc 
+	# Checkout submodule for Vundle
+	if [[ ! -e vim/bundle/Vundle.vim/README.md ]]; then
+		git submodule init
+		git submodule update
+	fi;
 
-	# Copy Vundle directory (to manage vim plugins)
+	# Copy vim directory (to manage vim plugins)
 	cp -r "$PWD/vim" ~/.vim
 
 	# Copy git configuration
