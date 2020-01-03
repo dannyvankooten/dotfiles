@@ -17,7 +17,7 @@ function doIt() {
 	fi;
 
 	# Copy vim directory (to manage vim plugins)
-	cp -r "$PWD/vim" ~/.vim
+	cp -r "$PWD/vim/" ~/.vim
 
 	# Copy git configuration
 	cp git/gitconfig ~/.gitconfig
