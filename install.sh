@@ -20,7 +20,7 @@ function doIt() {
 	cp -r "$PWD/vim/." $HOME/.vim
 
 	# Run compilation step for YouCompleteMe vim plugin
-	$HOME/.vim/bundle/YouCompleteMe/install.sh --clang-completer
+	python3 $HOME/.vim/bundle/YouCompleteMe/install.py --clang-completer
 
 	# Copy git configuration
 	cp git/gitconfig $HOME/.gitconfig
