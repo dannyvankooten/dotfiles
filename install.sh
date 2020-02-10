@@ -19,6 +19,9 @@ function doIt() {
 	# Copy vim directory (to manage vim plugins)
 	cp -r "$PWD/vim/." $HOME/.vim
 
+	# Run compilation step for YouCompleteMe vim plugin
+	$HOME/.vim/bundle/YouCompleteMe/install.sh --clang-completer
+
 	# Copy git configuration
 	cp git/gitconfig $HOME/.gitconfig
 }
@@ -32,5 +35,6 @@ else
 		doIt;
 	fi;
 fi;
+
 unset doIt;
 
