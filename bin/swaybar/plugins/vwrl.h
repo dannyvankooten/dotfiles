@@ -89,16 +89,14 @@ double find_value(struct Page *page, char needle_s[], char needle_e) {
     }
 
     // read everything up to needle_e into char 
-    char buf[100];
-    int j = 0;
-    while (i < page->size && page->buf[i] != needle_e) {
+    char buf[BUFSIZ];
+    int j;
+    for (j=0; i < page->size && page->buf[i] != needle_e && j < BUFSIZ-1; i++) {
         if (page->buf[i] == ',') {
             buf[j++] = '.';
         } else {
             buf[j++] = page->buf[i];
         }
-
-        i++;
     }
     buf[j++] = '\0';
 

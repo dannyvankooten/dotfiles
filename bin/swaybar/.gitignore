@@ -1,3 +1,4 @@
 bar 
 .vscode
 .dist
+*.dSYM
