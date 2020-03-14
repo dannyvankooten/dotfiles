@@ -30,6 +30,9 @@ set relativenumber
 set shiftwidth=4
 set tabstop=4
 
+" allow backspace in insert mode
+set backspace=indent,eol,start
+
 " Show the filename in the window titlebar
 set title
 
