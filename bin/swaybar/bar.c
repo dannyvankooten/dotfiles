@@ -29,26 +29,26 @@ void get_time_block(char buf[]) {
 }
 
 int main() {
-   
-
     char *str = "{\"version\": 1}";
     puts(str);
    
     char time_block_buf[64] = { '\0' };
     char financial_markets_buf[512] = { '\0' };
+    get_financial_markets_block(financial_markets_buf);
+    
     puts("[");
     while (1) {
         current_time = get_time();
         get_time_block(time_block_buf);
         
         // only update financial markets block once per hour
-        if (current_time->tm_min == 0 || strlen(financial_markets_buf) == 0) {
+        if (current_time->tm_min == 0) {
             get_financial_markets_block(financial_markets_buf);
         }
 
         printf("[%s, %s],\n", financial_markets_buf, time_block_buf);
-
         fflush(stdout);
+        
         sleep(1);
     }
     puts("]");
