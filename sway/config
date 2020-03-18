@@ -230,7 +230,7 @@ mode "$mode_launcher" {
 	bindsym f exec firefox; mode "default"
 		bindsym t exec todoist; mode "default"
 		bindsym c exec code; mode "default"
-		bindsym p exec phpstorm; mode "default"
+		bindsym p exec _JAVA_AWT_WM_NONREPARENTING=1 phpstorm; mode "default"
 
 		bindsym Escape mode "default"
 		bindsym Return mode "default"
