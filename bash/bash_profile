@@ -55,3 +55,7 @@ done;
 # Source autojump - https://github.com/wting/autojump
 [ -e "/etc/profile.d/autojump.bash" ] && source /etc/profile.d/autojump.bash
 
+# Auto-start Sway WM on login
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+	exec sway
+fi 
