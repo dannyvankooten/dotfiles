@@ -7,7 +7,7 @@ languages()
 	if [[ -d "languages" ]]; then
 		# Build .pot file
 		if [[ $(command -v wp 2>&1) ]]; then
-			wp i18n make-pot . --skip-js 
+			wp i18n make-pot .
 		fi;
 
 
