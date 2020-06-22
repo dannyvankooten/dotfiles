@@ -24,6 +24,9 @@ function doIt() {
 
 	# Copy git configuration
 	cp git/gitconfig $HOME/.gitconfig
+
+	# Copy sway configuration
+	cp sway/config $HOME/.config/sway/config
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
