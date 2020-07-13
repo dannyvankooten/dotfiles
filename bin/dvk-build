@@ -13,12 +13,12 @@ languages()
 
 		# Build .mo files
 		for file in `find languages/. -name "*.po"` ; do msgfmt -o ${file/.po/.mo} $file; done
-	fi;
 
-	# Add to Git
-	if [[ -e ".git" ]]; then
-		git add languages/.
-		git commit -m "updated languages"
+		# Add to Git
+		if [[ -e ".git" ]]; then
+			git add languages/.
+			git commit -m "updated languages"
+		fi;
 	fi;
 }
 
@@ -60,6 +60,7 @@ autoloader()
 	# Run Composer
 	if [ -e composer.json ]; then
 		# Make sure dev-dependencies are not installed
+		rm -r vendor/
 		composer update --no-dev --prefer-dist --optimize-autoloader
 
 		git add vendor/

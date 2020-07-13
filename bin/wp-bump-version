@@ -44,10 +44,10 @@ foreach ($php_files as $file) {
 
 replace_in_file('/"version": ?".+"/', sprintf('"version": "%s"', $version), 'info.json');
 
-if (file_exists('.git')) {a
-	exec ('git add readme.txt');
+if (file_exists('.git')) {
+	exec('git add readme.txt');
 	if (file_exists('info.json')) {
-		exec('git add info.jsn');
+		exec('git add info.json');
 	}
     exec('git add ' . join(' ', $php_files));
     exec("git commit -m \"Bump version to v$version\"");
