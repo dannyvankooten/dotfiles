@@ -79,6 +79,7 @@ mv "/tmp/$PLUGIN_NAME.zip" "$DEST"
 echo "$DEST"
 
 # Push to GitHub
+cd "$PLUGIN_DIRECTORY"
 if [[ -e ".git" ]]; then
 	git push origin master
 	git push origin "tags/$VERSION"
