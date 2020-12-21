@@ -1,314 +1,174 @@
-accerciser 3.36.0-1
-adobe-source-code-pro-fonts 2.030ro+1.050it-5
-alacritty 0.4.1-2
-amd-ucode 20200224.efcfa03-1
-android-studio 3.5.0.21-2
-ansible 2.9.6-1
-autogen 5.18.14-1
-autojump 22.5.3-1
-automake 1.16.1-2
-baobab 3.34.0-1
-base 2-2
-bash 5.0.016-1
-bash-completion 2.10-1
-bison 3.5.2-1
-brasero 3.12.2+65+gb14df0a8-1
-broadcom-wl 6.30.223.271-176
-bzip2 1.0.8-3
-cabextract 1.9.1-1
-check 0.14.0-1
-cmake 3.16.5-1
-code 1.42.1-1
-composer 1.10.0-1
-coreutils 8.31-3
-cronie 1.5.5-1
-cryptsetup 2.3.0-1
-dconf-editor 3.36.0-1
-devhelp 3.36.0-1
-device-mapper 2.02.186-5
-dhcpcd 8.1.6-1
-diffutils 3.7-3
-dmenu 4.9-1
-docker 1:19.03.7-1
-e2fsprogs 1.45.5-1
-efibootmgr 16-2
-entr 4.4-1
-eog 3.36.0-1
-epiphany 3.36.0-1
-evince 3.36.0-1
-fakeroot 1.24-2
-file 5.38-3
-file-roller 3.36.0-1
-filesystem 2019.10-2
-findutils 4.7.0-2
-firefox 74.0-2
-flashplugin 32.0.0.344-1
-flex 2.6.4-3
-gawk 5.0.1-2
-gcc-libs 9.2.1+20200130-2
-gconf 3.2.6+11+g07808097-5
-gdb 9.1-1
-gedit 3.36.0-1
-gettext 0.20.1-3
-git 2.25.1-1
-glibc 2.31-1
-gnome-backgrounds 3.36.0-1
-gnome-boxes 3.36.0-1
-gnome-builder 3.36.0-1
-gnome-calculator 3.36.0-1
-gnome-characters 3.34.0-1
-gnome-clocks 3.36.0-1
-gnome-code-assistance 1:3.16.1+15+g0fd8b5f-1
-gnome-color-manager 3.35.90+1+g98904208-1
-gnome-devel-docs 3.32.1+30+gf3ad0fe5-1
-gnome-disk-utility 3.36.0-1
-gnome-documents 3.34.0+6+g966b04ec-1
-gnome-font-viewer 3.34.0+27+g5ffd1ba-1
-gnome-getting-started-docs 3.36.0-1
-gnome-keyring 1:3.36.0-1
-gnome-klotski 3.36.0-1
-gnome-logs 3.34.0-1
-gnome-maps 3.36.0-1
-gnome-menus 3.36.0-1
-gnome-multi-writer 3.32.1-1
-gnome-nettool 3.8.1+205+g8550eef-2
-gnome-nibbles 3.36.0-1
-gnome-photos 3.34.1-1
-gnome-recipes 2.0.4-1
-gnome-robots 3.36.0-1
-gnome-screenshot 3.36.0-1
-gnome-session 3.36.0-1
-gnome-settings-daemon 3.36.0-1
-gnome-software 3.34.2-2
-gnome-sound-recorder 3.34.0-1
-gnome-system-monitor 3.36.0-1
-gnome-taquin 3.36.0-1
-gnome-terminal 3.36.0.1-2
-gnome-tetravex 3.36.0-1
-gnome-tweaks 3.34.0-2
-gnome-usage 3.33.2-1
-gnome-user-docs 3.36.0-1
-gnome-weather 3.34.0-1
-gnu-free-fonts 20120503-7
-gnu-netcat 0.7.1-7
-go 2:1.14-1
-google-chrome 71.0.3578.98-1
-gpicview 0.2.5-4
-grep 3.4-1
-grilo-plugins 0.3.11+4+g11cc1f8-1
-grim 1.3.0-1
-grub 2:2.04-5
-gthumb 3.9.1-1
-guake 3.7.0-1
-gvfs 1.44.0-1
-gvfs-afc 1.44.0-1
-gvfs-goa 1.44.0-1
-gvfs-google 1.44.0-1
-gvfs-gphoto2 1.44.0-1
-gvfs-mtp 1.44.0-1
-gvfs-nfs 1.44.0-1
-gvfs-smb 1.44.0-1
-gzip 1.10-3
-hitori 3.36.0-1
-httpie 2.0.0-2
-i3status 2.13-2
-iagno 3.36.0-1
-iftop 1.0pre4-3
-inetutils 1.9.4-8
-intel-ucode 20191115-3
-iproute2 5.5.0-1
-iputils 20190709-2
-jfsutils 1.1.15-7
-jupyter-notebook 6.0.3-1
-less 551-3
-libreoffice-fresh 6.4.1-3
-licenses 20191011-2
-lightsoff 3.36.0-1
-linux 5.5.8.arch1-1
-linux-firmware 20200224.efcfa03-1
-linux-headers 5.5.8.arch1-1
-logrotate 3.16.0-1
-lvm2 2.02.186-5
-lxappearance 0.6.3-2
-lxappearance-obconf 0.2.3-2
-lxde-common 0.99.2-2
-lxde-icon-theme 0.5.1-4
-lxdm 0.5.3-6
-lxhotkey 0.1.0-2
-lxinput 0.3.5-2
-lxlauncher 0.2.5-3
-lxpanel 0.10.0-1
-lxrandr 0.3.2-1
-lxsession 1:0.5.5-1
-lxtask 0.1.9-1
-lxterminal 0.3.2-2
-make 4.3-1
-mako 1.4.1-1
-man-db 2.9.1-1
-man-pages 5.05-1
-mariadb 10.4.12-1
-mdadm 4.1-2
-monit 5.26.0-1
-mousetweaks 3.32.0-1
-mplayer 38157-1
-mpv 1:0.32.0-1
-mutter 3.36.0-1
-nano 4.8-1
-nautilus 3.36.0-1
-netctl 1.20-2
-network-manager-applet 1.16.0-1
-networkmanager 1.22.8-1
-nginx-mainline 1.17.9-1
-npm 6.14.2-1
-nss-mdns 0.14.1-2
-openbox 3.6.1-6
-opera-legacy 12.16.1860-4
-orca 3.36.1-1
-package-query 1.9-3
-pacman 5.2.1-4
-pass 1.7.3-1
-patch 2.7.6-8
-pciutils 3.6.4-1
-pcmanfm 1.3.1-1
-perl 5.30.1-1
-php 7.4.3-1
-php-fpm 7.4.3-1
-php-gd 7.4.3-1
-php-intl 7.4.3-1
-php-pgsql 7.4.3-1
-php-sqlite 7.4.3-1
-pkgfile 21-1
-pkgstats 2.4.2-1
-polari 3.36.0-1
-postgresql 12.2-1
-postgresql-old-upgrade 11.7-1
-powerline-fonts 2.7-5
-powertop 2.11-1
-procps-ng 3.3.16-1
-psmisc 23.3-2
-python-matplotlib 3.2.0-1
-python-pandas 1.0.1-1
-python-pip 19.3.1-1
-python-pymongo 3.10.1-1
-python-qtpy 1.9.0-3
-python2-pip 19.3.1-1
-python2-pymongo 3.10.1-1
-python2-yaml 5.3-1
-quadrapassel 3.36.0-1
-re2c 1.3-1
-reiserfsprogs 3.6.27-3
-rsync 3.1.3-3
-rtl8812au-dkms-git 5.6.4.2.r7.g582c046-1
-rtorrent 0.9.8-2
-ruby-bundler 2.1.4-1
-rustup 1.21.1-4
-s-nail 14.9.17-1
-screamingfrogseospider 12.3-1
-sed 4.8-1
-shadow 4.8.1-1
-signal-desktop 1.32.1-1
-simple-scan 3.36.0-1
-slurp 1.2.0-1
-sqlitebrowser 3.11.2-1
-sshpass 1.06-2
-steam 1.0.0.61-4
-strace 5.5-1
-sublime-text 3210-1
-subversion 1.13.0-2
-sudo 1.8.31-1
-sushi 3.34.0-1
-sway 1:1.4-8
-swell-foop 3.34.1-1
-sysfsutils 2.1.0-11
-sysprof 3.36.0-1
-systemd-sysvcompat 245-2
-tali 3.36.0-1
-tar 1.32-3
-texinfo 6.7-2
-the_silver_searcher 2.2.0-1
-time 1.9-2
-todoist-electron 1.18.0-1
-totem 3.34.1-2
-tracker 2.3.4-1
-tracker-miners 2.3.3-1
-ttf-croscore 20190926-4
-ttf-dejavu 2.37-2
-ttf-droid 20121017-7
-ttf-ms-fonts 2.0-10
-ttf-roboto 2.138-1
-ufw 0.36-3
-usbutils 012-2
-util-linux 2.35.1-1
-valgrind 3.15.0-1
-vi 1:070224-4
-vim 8.2.0343-1
-vino 3.22.0+60+gd29a4f2-1
-weechat 2.7.1-1
-wget 1.20.3-2
-which 2.21-5
-wl-clipboard 1:2.0.0-1
-woeusb 3.3.0-2
-wrk 4.1.0-3
-xdg-user-dirs-gtk 0.10+9+g5b7efc6-2
-xf86-input-keyboard 1.9.0-3
-xf86-input-mouse 1.9.3-1
-xf86-video-amdgpu 19.1.0-1
-xf86-video-ati 1:19.1.0-1
-xf86-video-vesa 2.4.0-2
-xfsprogs 5.4.0-1
-xorg-bdftopcf 1.1-1
-xorg-docs 1.7.1-2
-xorg-font-util 1.3.2-1
-xorg-fonts-100dpi 1.0.3-4
-xorg-fonts-75dpi 1.0.3-4
-xorg-fonts-encodings 1.0.5-1
-xorg-iceauth 1.0.8-1
-xorg-luit 1.1.1-3
-xorg-mkfontscale 1.2.1-2
-xorg-server 1.20.7-1
-xorg-server-common 1.20.7-1
-xorg-server-devel 1.20.7-1
-xorg-server-xdmx 1.20.6-1
-xorg-server-xephyr 1.20.7-1
-xorg-server-xnest 1.20.7-1
-xorg-server-xvfb 1.20.7-1
-xorg-server-xwayland 1.20.7-1
-xorg-sessreg 1.1.2-1
-xorg-setxkbmap 1.3.2-1
-xorg-smproxy 1.0.6-2
-xorg-x11perf 1.6.1-1
-xorg-xauth 1.1-1
-xorg-xbacklight 1.2.3-1
-xorg-xcmsdb 1.0.5-2
-xorg-xcursorgen 1.0.7-1
-xorg-xdpyinfo 1.3.2-3
-xorg-xdriinfo 1.0.6-1
-xorg-xev 1.2.3-1
-xorg-xgamma 1.0.6-2
-xorg-xhost 1.0.8-1
-xorg-xinit 1.4.1-1
-xorg-xinput 1.6.3-1
-xorg-xkbcomp 1.4.3-1
-xorg-xkbevd 1.1.4-2
-xorg-xkbutils 1.0.4-3
-xorg-xkill 1.0.5-1
-xorg-xlsatoms 1.1.3-1
-xorg-xlsclients 1.1.4-1
-xorg-xmodmap 1.0.10-1
-xorg-xpr 1.0.5-1
-xorg-xprop 1.2.4-1
-xorg-xrandr 1.5.1-1
-xorg-xrdb 1.2.0-1
-xorg-xrefresh 1.0.6-1
-xorg-xset 1.2.4-1
-xorg-xsetroot 1.1.2-1
-xorg-xvinfo 1.1.4-1
-xorg-xwd 1.0.7-1
-xorg-xwininfo 1.1.5-1
-xorg-xwud 1.0.5-1
-xournalpp 1.0.17-2
-xterm 353-1
-yelp 3.36.0-1
-youtube-dl 2020.03.08-1
-zig 0.5.0-1
-playerctl
+acpica
+autoconf
+automake
+baobab
+base
+binutils
+bison
+cheese
+chrome-gnome-shell
+cpio
+curl
+efibootmgr
+eog
+epiphany
+evince
+fakeroot
+file
+file-roller
+findutils
+firefox
+flex
+gawk
+gcc
+gdm
+gedit
+gettext
+git
+gnome-backgrounds
+gnome-books
+gnome-boxes
+gnome-calculator
+gnome-calendar
+gnome-characters
+gnome-clocks
+gnome-color-manager
+gnome-contacts
+gnome-control-center
+gnome-disk-utility
+gnome-documents
+gnome-font-viewer
+gnome-getting-started-docs
+gnome-keyring
+gnome-logs
+gnome-maps
+gnome-menus
+gnome-music
+gnome-photos
+gnome-remote-desktop
+gnome-screenshot
+gnome-session
+gnome-settings-daemon
+gnome-shell
+gnome-shell-extensions
+gnome-software
+gnome-system-monitor
+gnome-terminal
+gnome-themes-extra
+gnome-user-docs
+gnome-user-share
+gnome-video-effects
+gnome-weather
+grep
+grilo-plugins
+groff
+grub
+gvfs
+gvfs-afc
+gvfs-goa
+gvfs-google
+gvfs-gphoto2
+gvfs-mtp
+gvfs-nfs
+gvfs-smb
+gzip
+iwd
+libtool
+linux
+linux-firmware
+linux-headers
+m4
+make
+man-pages
+mariadb
+mutter
+nautilus
+networkmanager
+nginx
+nodejs
+npm
+orca
+pacman
+patch
+pavucontrol
+php
+php-fpm
+phpstorm
+phpstorm-jre
+pkgconf
+powertop
+rsync
+rubygems
+rygel
+sed
+signal-desktop
+simple-scan
+spotify
+subversion
+sudo
+sushi
+texinfo
+tlp
+todoist-electron
+totem
+tracker
+tracker-miners
+tracker3
+tracker3-miners
+vim
+vino
+vulkan-radeon
+wget
+which
+xdg-user-dirs-gtk
+xf86-video-amdgpu
+xf86-video-vesa
+xorg-bdftopcf
+xorg-docs
+xorg-font-util
+xorg-fonts-100dpi
+xorg-fonts-75dpi
+xorg-fonts-encodings
+xorg-iceauth
+xorg-mkfontscale
+xorg-server
+xorg-server-common
+xorg-server-devel
+xorg-server-xephyr
+xorg-server-xnest
+xorg-server-xvfb
+xorg-sessreg
+xorg-setxkbmap
+xorg-smproxy
+xorg-x11perf
+xorg-xauth
+xorg-xbacklight
+xorg-xcmsdb
+xorg-xcursorgen
+xorg-xdpyinfo
+xorg-xdriinfo
+xorg-xev
+xorg-xgamma
+xorg-xhost
+xorg-xinput
+xorg-xkbcomp
+xorg-xkbevd
+xorg-xkbutils
+xorg-xkill
+xorg-xlsatoms
+xorg-xlsclients
+xorg-xmodmap
+xorg-xpr
+xorg-xprop
+xorg-xrandr
+xorg-xrdb
+xorg-xrefresh
+xorg-xset
+xorg-xsetroot
+xorg-xvinfo
+xorg-xwayland
+xorg-xwd
+xorg-xwininfo
+xorg-xwud
+xournalpp
+yelp

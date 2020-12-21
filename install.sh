@@ -11,22 +11,22 @@ function doIt() {
 	source $HOME/.bash_profile;
 
 	# Checkout submodule for Vundle
-	if [[ ! -e vim/bundle/Vundle.vim/README.md ]]; then
-		git submodule init
-		git submodule update
-	fi;
+	#if [[ ! -e vim/bundle/Vundle.vim/README.md ]]; then
+	#	git submodule init
+	#	git submodule update
+	#fi;
 
 	# Copy vim directory (to manage vim plugins)
 	cp -r "$PWD/vim/." $HOME/.vim
 
 	# Run compilation step for YouCompleteMe vim plugin
-	python3 $HOME/.vim/bundle/YouCompleteMe/install.py --clang-completer
+	#python3 $HOME/.vim/bundle/YouCompleteMe/install.py --clang-completer
 
 	# Copy git configuration
 	cp git/gitconfig $HOME/.gitconfig
 
 	# Copy sway configuration
-	cp sway/config $HOME/.config/sway/config
+	#cp sway/config $HOME/.config/sway/config
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
