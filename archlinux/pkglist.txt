@@ -97,6 +97,7 @@ phpstorm
 phpstorm-jre
 pkgconf
 powertop
+python2
 rsync
 rubygems
 rygel
