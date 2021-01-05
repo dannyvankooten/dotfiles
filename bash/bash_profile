@@ -22,8 +22,8 @@ alias radio10="mplayer http://stream.radio10.nl/radio10"
 PATH="$PATH:$DOTFILES_DIR/bin"
 PATH="$PATH:$HOME/.local/bin"
 
-if [[ -d "$HOME/.gem/ruby/2.6.0/bin" ]]; then
-	PATH="$PATH:$HOME/.gem/ruby/2.6.0/bin"
+if [[ -d "$HOME/.gem/ruby/2.7.0/bin" ]]; then
+	PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
 fi;
 
 # Pretty bash prompt
