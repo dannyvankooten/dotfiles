@@ -1,0 +1,8 @@
+Host exodus.mc4wp.com
+	User mc4wp
+
+Host exodus.boxzillaplugin.com
+	User boxzillaplugin
+
+Host s1.htmlformsplugin.com
+	User htmlforms
