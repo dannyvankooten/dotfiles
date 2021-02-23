@@ -70,7 +70,9 @@ zip -r "/tmp/$PLUGIN_NAME.zip" $PLUGIN_DIRECTORY \
 	-x "$PLUGIN_DIRECTORY/composer.lock" \
 	-x "$PLUGIN_DIRECTORY/codesniffer.xml" \
 	-x "$PLUGIN_DIRECTORY/build/*" \
-	-x "$PLUGIN_DIRECTORY/assets/src/*" \
+	-x "$PLUGIN_DIRECTORY/assets/src/sass" \
+	-x "$PLUGIN_DIRECTORY/assets/src/img" \
+	-x "$PLUGIN_DIRECTORY/assets/src/css" \
 	-x "$PLUGIN_DIRECTORY/code-snippets" \
 	-x "$PLUGIN_DIRECTORY/**/node_modules/*"
 
