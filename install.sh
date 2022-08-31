@@ -19,8 +19,13 @@ function doIt() {
 	# Copy vim directory (to manage vim plugins)
 	cp -r "$PWD/vim/." $HOME/.vim
 
+	# Install Vundle plugins
+	vim -c 'VundleInstall' -c 'q!' -c 'q!'
+
 	# Run compilation step for YouCompleteMe vim plugin
-	#python3 $HOME/.vim/bundle/YouCompleteMe/install.py --clang-completer
+	if [[ -d "$HOME/.vim/bundle/YouCompleteMe" ]]; then  
+		python3 $HOME/.vim/bundle/YouCompleteMe/install.py --clang-completer
+	fi;
 
 	# Copy git configuration
 	cp git/gitconfig $HOME/.gitconfig

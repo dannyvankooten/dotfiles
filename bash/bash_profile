@@ -25,6 +25,9 @@ PATH="$PATH:$HOME/.local/bin"
 if [[ -d "$HOME/.gem/ruby/2.7.0/bin" ]]; then
 	PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
 fi;
+if [[ -d "$HOME/.gem/ruby/3.0.0/bin" ]]; then
+	PATH="$PATH:$HOME/.gem/ruby/3.0.0/bin"
+fi;
 
 # Pretty bash prompt
 source "$DOTFILES_DIR/bash/bash_prompt"
