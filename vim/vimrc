@@ -1,16 +1,6 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
- Plugin 'VundleVim/Vundle.vim'
-Plugin 'ycm-core/YouCompleteMe'
-"Plugin 'mileszs/ack.vim'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-
 filetype plugin indent on    " required
 
 " enable syntax highlighting
@@ -72,14 +62,6 @@ set directory=/tmp
 
 " enable closetag in these files
 let g:closetag_filenames = '*.html,*.php'
-
-let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
-
-" run GoImport on save
-let g:go_fmt_command = "goimports"
-
-" update tags asynchronously
-let g:easytags_async = 1
 
 " use a project specific tag file first
 set tags=./.tags;,~/.vimtags

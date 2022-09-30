@@ -56,3 +56,5 @@ done;
 
 # Source autojump - https://github.com/wting/autojump
 [ -e "/etc/profile.d/autojump.bash" ] && source /etc/profile.d/autojump.bash
+
+pacmansyu

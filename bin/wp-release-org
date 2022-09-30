@@ -103,7 +103,7 @@ svn status
 
 printf "\nPush $NAME v$VERSION to WordPress.org? (y)"
 read CONFIRM
-if [[ "$CONFIRM" != "y" ]]; then
+if [[ "$CONFIRM" == "n" ]]; then
 	exit 1;
 fi;
 
