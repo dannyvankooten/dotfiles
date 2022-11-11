@@ -21,6 +21,7 @@ alias radio10="mplayer http://stream.radio10.nl/radio10"
 # Environment vars
 PATH="$PATH:$DOTFILES_DIR/bin"
 PATH="$PATH:$HOME/.local/bin"
+PATH="$PATH:$HOME/.cargo/bin"
 
 if [[ -d "$HOME/.gem/ruby/2.7.0/bin" ]]; then
 	PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
@@ -57,4 +58,5 @@ done;
 # Source autojump - https://github.com/wting/autojump
 [ -e "/etc/profile.d/autojump.bash" ] && source /etc/profile.d/autojump.bash
 
+# Run weekly Pacman update check
 pacmansyu
