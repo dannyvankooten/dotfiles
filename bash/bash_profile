@@ -58,5 +58,8 @@ done;
 # Source autojump - https://github.com/wting/autojump
 [ -e "/etc/profile.d/autojump.bash" ] && source /etc/profile.d/autojump.bash
 
+# Fix for PHPStorm on Sway 
+ export _JAVA_AWT_WM_NONREPARENTING=1
+
 # Run weekly Pacman update check
 pacmansyu

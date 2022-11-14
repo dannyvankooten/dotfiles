@@ -50,3 +50,4 @@ waybar
 otf-font-awesome
 brightnessctl
 imv
+fish
