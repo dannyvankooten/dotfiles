@@ -49,3 +49,4 @@ foot
 waybar
 otf-font-awesome
 brightnessctl
+imv
