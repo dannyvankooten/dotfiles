@@ -51,3 +51,4 @@ otf-font-awesome
 brightnessctl
 imv
 fish
+gammastep

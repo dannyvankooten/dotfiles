@@ -224,3 +224,4 @@ include /etc/sway/config.d/*
 
 # Execute script to disable monitor if laptop in clamshell
 exec_always ~/.config/sway/support_clamshell_mode.sh
+exec_always gammastep-indicator
