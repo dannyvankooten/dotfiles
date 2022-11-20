@@ -9,5 +9,5 @@ if status is-interactive
 	set -gx _JAVA_AWT_WM_NONREPARENTING 1
 end
 
-
+set -gx EDITOR vim
 set -gx _JAVA_AWT_WM_NONREPARENTING 1
