@@ -224,4 +224,7 @@ include /etc/sway/config.d/*
 
 # Execute script to disable monitor if laptop in clamshell
 exec_always ~/.config/sway/support_clamshell_mode.sh
-exec_always gammastep-indicator
+
+# Execute redshift equivalent (blue light filter)
+exec_always wlsunset -s 18:30 -S 6:30
+#exec_always gammastep-indicator
