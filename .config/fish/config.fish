@@ -1,13 +1,8 @@
 if status is-interactive
-    # Commands to run in interactive sessions can go here
-	starship init fish | source
 
-	# Run pacmansyu
-	pacmansyu 
-
-	# Fix for Jetbrains IDE's using JDK
+	set -gx EDITOR vim
 	set -gx _JAVA_AWT_WM_NONREPARENTING 1
-end
+	set -gx MOZ_ENABLE_WAYLAND 1
+	set -U fish_user_paths /home/danny/.cargo/bin
 
-set -gx EDITOR vim
-set -gx _JAVA_AWT_WM_NONREPARENTING 1
+end
