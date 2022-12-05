@@ -1,3 +1,6 @@
+call plug#begin()
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+call plug#end()
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -71,12 +74,9 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
-" Python specific set-up:
-au BufNewFile,BufRead *.py
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
-    \ set fileformat=unix
+au Filetype python set
+     \ tabstop=4
+     \ softtabstop=4
+     \ shiftwidth=4
+     \ textwidth=79
+

@@ -1,4 +1,4 @@
-My minimalistic dotfiles. Tested and in use on Arch Linux and OSX Catalina.
+My (Danny's) dotfiles. Using this on both Arch Linux (Lenovo Yoga Slim 7) and Debian 11 (Thinkpad X230).
 
 ### Usage
 Run `./install.sh` to install.
