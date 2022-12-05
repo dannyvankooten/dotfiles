@@ -80,3 +80,4 @@ au Filetype python set
      \ shiftwidth=4
      \ textwidth=79
 
+tnoremap <Esc> <C-\><C-n>
