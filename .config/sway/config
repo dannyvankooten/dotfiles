@@ -226,5 +226,4 @@ include /etc/sway/config.d/*
 exec_always ~/.config/sway/support_clamshell_mode.sh
 
 # Execute redshift equivalent (blue light filter)
-exec_always wlsunset -s 18:30 -S 6:30
-#exec_always gammastep-indicator
+exec_always gammastep -l 51.8:5.8 -m wayland &
