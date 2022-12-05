@@ -21,7 +21,7 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
 ### Output configuration
 
 # Set wallpaper
-output * bg /home/danny/Pictures/ricardo-gomez-angel-WDfHA3VyvWs-unsplash\(2\).jpg fill
+output * bg /home/danny/.config/sway/background.jpg
 
 # Example configuration:
 #
