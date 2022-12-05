@@ -3,6 +3,9 @@
 # Install bash configuration
 #./bash/install.sh 
 
+# Copy vimrc
+cp vim/vimrc $HOME/.vimrc
+
 # Copy git configuration
 cp git/gitconfig $HOME/.gitconfig
 
