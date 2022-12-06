@@ -4,10 +4,12 @@
 #./bash/install.sh 
 
 # Copy vimrc
-cp vim/vimrc $HOME/.vimrc
+cp .vimrc $HOME/.vimrc
 
 # Copy git configuration
-cp git/gitconfig $HOME/.gitconfig
+cp .gitconfig $HOME/.gitconfig
+
+cp -r .ssh $HOME/.ssh
 
 # Copy other configuration files into ~/.config
 cp -r .config/* $HOME/.config/

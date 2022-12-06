@@ -66,11 +66,6 @@ let g:closetag_filenames = '*.html,*.php'
 " use a project specific tag file first
 set tags=./.tags;,~/.vimtags
 
-" Use ag (silver searcher) instead of Ack
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
-
 " Python specific set-up:
 au BufNewFile,BufRead *.py
     \ set tabstop=4
