@@ -6,7 +6,7 @@ if status is-interactive
 end
 
 # find dotfiles directory
-set DOTFILES_DIR (find $HOME -type d -name "dotfiles" | sed 1q)
+set DOTFILES_DIR (find $HOME -maxdepth 3 -type d -name "dotfiles" | sed 1q)
 
 # add some bin directories to path
 set -U fish_user_paths $HOME/.cargo/bin $fish_user_paths

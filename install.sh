@@ -22,6 +22,6 @@ end
 
 # Install Pacman packages if on Arch
 if which pacman
-	./arch/install.sh
+	./archlinux/install.sh
 end 
 
