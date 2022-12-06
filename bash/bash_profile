@@ -5,13 +5,6 @@ if [[ -z "$DOTFILES_DIR" ]]; then
 	exit 1;
 fi;
 
-OS="$(uname)"
-
-# Aliases
-if [[ $OS != "Darwin" ]]; then
-	alias ls='ls --color=auto'
-fi;
-
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
 alias dmesg="dmesg --color=always"

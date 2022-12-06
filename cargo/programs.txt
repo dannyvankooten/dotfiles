@@ -1,3 +1,0 @@
-toml2json
-ripgrep
-

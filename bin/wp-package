@@ -9,7 +9,7 @@
 # This creates an optimized .zip package out of a Git managed plugin directory.
 #
 # - Builds language files
-# - Builds assets (Grunt or Gulp)
+# - Builds assets (Gulp, Grunt of Webpack)
 # - Builds optimized autoloader (Composer)
 # - Copies CHANGELOG.md to readme.txt
 # - Bumps version in readme.txt, main plugin file and .json files to specified version
@@ -59,6 +59,7 @@ cd ..
 zip -r "/tmp/$PLUGIN_NAME.zip" $PLUGIN_DIRECTORY \
 	-x "$PLUGIN_DIRECTORY/.*" \
 	-x "$PLUGIN_DIRECTORY/node_modules/*" \
+	-x "$PLUGIN_DIRECTORY/**/node_modules/*" \
 	-x "$PLUGIN_DIRECTORY/tests/*" \
 	-x "$PLUGIN_DIRECTORY/*/sass/*" \
 	-x "$PLUGIN_DIRECTORY/*/browserify/*" \
@@ -69,12 +70,11 @@ zip -r "/tmp/$PLUGIN_NAME.zip" $PLUGIN_DIRECTORY \
 	-x "$PLUGIN_DIRECTORY/README.md" \
 	-x "$PLUGIN_DIRECTORY/composer.lock" \
 	-x "$PLUGIN_DIRECTORY/codesniffer.xml" \
+	-x "$PLUGIN_DIRECTORY/phpcs.xml" \
 	-x "$PLUGIN_DIRECTORY/build/*" \
-	-x "$PLUGIN_DIRECTORY/assets/src/sass" \
-	-x "$PLUGIN_DIRECTORY/assets/src/img" \
-	-x "$PLUGIN_DIRECTORY/assets/src/css" \
-	-x "$PLUGIN_DIRECTORY/code-snippets" \
-	-x "$PLUGIN_DIRECTORY/**/node_modules/*"
+	-x "$PLUGIN_DIRECTORY/assets/src/*" \
+	-x "$PLUGIN_DIRECTORY/code-snippets/*" \
+	-x "$PLUGIN_DIRECTORY/sample-code-snippets/*" 
 
 # Move to destination directory
 mv "/tmp/$PLUGIN_NAME.zip" "$DEST"
