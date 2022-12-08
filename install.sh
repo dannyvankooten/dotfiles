@@ -18,12 +18,12 @@ cp -r .config/* $HOME/.config/
 source $HOME/.config/fish/config.fish
 
 # Install APT packages if on Debian/Ubuntu
-if which apt
+if type -q apt
 	./apt/install.sh
 end
 
 # Install Pacman packages if on Arch
-if which pacman
+if type -q pacman
 	./archlinux/install.sh
 end 
 
