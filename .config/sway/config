@@ -213,7 +213,7 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # screenshot to clipboard
 bindsym Print exec grim - | swappy -f -
-bindsym Shift+Print exec grim -g "$(slurp)" - | swappy -f -
+bindsym Shift+Print exec  slurp | grim -g - - | xclip -i -selection c -t image/png
 
 # brightness (backlight) ctrl through keyboard keys
 bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
