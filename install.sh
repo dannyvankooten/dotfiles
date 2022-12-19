@@ -27,3 +27,12 @@ if type -q pacman
 	./archlinux/install.sh
 end 
 
+# Install custom fonts
+if not test -d $HOME/.fonts 
+    echo "Installing FontAwesome5 font"
+    wget https://use.fontawesome.com/releases/v5.15.1/fontawesome-free-5.15.1-desktop.zip -O /tmp/fontawesome.zip 
+    mkdir $HOME/.fonts
+    unzip /tmp/fontawesome.zip -d /tmp/fontawesome 
+    cp /tmp/fontawesome/fontawesome-free-5.15.1-desktop/otfs/*.otf $HOME/.fonts/
+    fc-cache -f -v 
+end 

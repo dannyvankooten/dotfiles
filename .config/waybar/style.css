@@ -1,6 +1,6 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-family: Arial, "Font Awesome 5 Free", sans-serif;
     font-size: 13px;
 }
 
@@ -86,7 +86,8 @@ button:hover {
 #mode,
 #idle_inhibitor,
 #scratchpad,
-#mpd {
+#mpd,
+#custom-clock {
     padding: 0 10px;
     color: #ffffff;
 }
@@ -137,7 +138,9 @@ label:focus {
     color: #2a5c45;
     min-width: 100px;
 }
-
+#custom-clock {
+    font-family: Arial, sans-serif;
+}
 #custom-media.custom-spotify {
     background-color: #66cc99;
 }
