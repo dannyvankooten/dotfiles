@@ -1,5 +1,6 @@
 call plug#begin()
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'gpanders/editorconfig.nvim' 
 call plug#end()
 set nocompatible              " be iMproved, required
 filetype off                  " required
