@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -e 
+echo $1 
+
+while true; do \
+    make $1; \
+    inotifywait -qre close_write .; \
+done
