@@ -2,7 +2,7 @@
 
 set -e 
 
-while true; do \
-    make $1; \
-    inotifywait --quiet --recursive --event close_write .; \
+while true; do 
+    make "$@"
+    inotifywait --quiet --recursive --event close_write .
 done
