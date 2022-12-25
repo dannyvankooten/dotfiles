@@ -1,4 +1,3 @@
-
 brightnessctl
 build-essential
 curl
@@ -11,7 +10,9 @@ git
 grim
 gzip
 htop
+inotify-tools
 less
+make
 playerctl
 pulseaudio
 screenfetch
