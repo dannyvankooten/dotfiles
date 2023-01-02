@@ -7,9 +7,9 @@ filetype plugin indent on    " required
 call plug#begin()
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'gpanders/editorconfig.nvim' 
+Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
-Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'nelsyeung/twig.vim'
 Plug 'leafOfTree/vim-matchtag'
 call plug#end()
@@ -72,7 +72,7 @@ set backupskip=/tmp/*,/private/tmp/*
 set directory=/tmp
 
 " Set color scheme
-colorscheme tokyonight-moon
+colorscheme default
 
 " Some servers have issues with backup files, see #649.
 set nobackup
@@ -256,6 +256,8 @@ EOF
 lua << EOF 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+vim.opt.termguicolors = true
 
 require("nvim-tree").setup()
 EOF 
