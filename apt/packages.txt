@@ -17,10 +17,12 @@ playerctl
 pulseaudio
 screenfetch
 sed
+shellcheck
 slurp
 sway
 swaybg
 tar
+tidy
 tlp
 vim
 vim

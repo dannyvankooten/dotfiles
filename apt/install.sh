@@ -1,3 +1,3 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 xargs sudo apt install < apt/packages.txt 

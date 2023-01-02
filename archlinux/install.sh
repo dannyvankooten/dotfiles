@@ -1,3 +1,3 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 sudo pacman -S - < archlinux/pkglist.txt 
