@@ -1,14 +1,18 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+filetype plugin indent on    " required
+
+" List of installed plugins (using vim-plug)
 call plug#begin()
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'gpanders/editorconfig.nvim' 
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'nelsyeung/twig.vim'
+Plug 'leafOfTree/vim-matchtag'
 call plug#end()
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-filetype plugin indent on    " required
 
 " enable syntax highlighting
 syntax on
@@ -67,16 +71,8 @@ set backupskip=/tmp/*,/private/tmp/*
 " store swap files in /tmp instead of wd
 set directory=/tmp
 
-" enable closetag in these files
-let g:closetag_filenames = '*.html,*.php'
-
-" use a project specific tag file first
-set tags=./.tags;,~/.vimtags
-
-" Use ag (silver searcher) instead of Ack
-if executable('ag')
-    let g:ackprg = 'ag --vimgrep'
-endif
+" Set color scheme
+colorscheme tokyonight-moon
 
 " Some servers have issues with backup files, see #649.
 set nobackup
@@ -239,6 +235,7 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " Enable terminal colors (required for bufferline & nvim-tree)
 set termguicolors
 
+" Init bufferline
 lua << EOF
 require("bufferline").setup{
     options = {
@@ -262,3 +259,7 @@ vim.g.loaded_netrwPlugin = 1
 
 require("nvim-tree").setup()
 EOF 
+
+" Enable matchtags on certain files
+let g:vim_matchtag_enable_by_default = 1
+let g:vim_matchtag_files = '*.html,*.xml,*.js,*.jsx,*.twig'
