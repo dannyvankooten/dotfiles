@@ -1,6 +1,8 @@
 call plug#begin()
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'gpanders/editorconfig.nvim' 
+Plug 'nvim-tree/nvim-tree.lua'
+Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
 call plug#end()
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -236,3 +238,18 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" Initialize nvim-bufferline 
+set termguicolors
+lua << EOF
+require("bufferline").setup{}
+EOF
+
+" Initialize nvim-tree 
+lua << EOF 
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- empty setup using defaults
+require("nvim-tree").setup()
+EOF 
