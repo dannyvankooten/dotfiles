@@ -71,6 +71,12 @@ output eDP-1 pos 0 0
     # Start your launcher
     bindsym $mod+d exec $menu
 
+    # Mouse keys
+    # You can get keynames using `xev -event keyboard  | egrep -o 'keycode.*\)'`
+    bindsym Control+Return exec 'mousekeys_record.sh'
+    bindsym Control+Shift_R exec 'mousekeys_click.sh'
+    bindsym Control+slash exec 'mousekeys_jump.sh'
+
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
