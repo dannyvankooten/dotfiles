@@ -74,8 +74,16 @@ output eDP-1 pos 0 0
     # Mouse keys
     # You can get keynames using `xev -event keyboard  | egrep -o 'keycode.*\)'`
     bindsym Control+Return exec 'mousekeys_record.sh'
+    bindsym Control+KP_Delete exec 'mousekeys_record.sh'
     bindsym Control+Shift_R exec 'mousekeys_click.sh'
+    bindsym Control+KP_Enter exec 'mousekeys_click.sh'
     bindsym Control+slash exec 'mousekeys_jump.sh'
+    bindsym Control+KP_Insert exec 'mousekeys_jump.sh'
+    bindsym Control+KP_Left seat * cursor move -42 0 
+    bindsym Control+KP_Right seat * cursor move 42 0 
+    bindsym Control+KP_Up seat * cursor move 0 -36
+    bindsym Control+KP_Down seat * cursor move 0 36 
+
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
