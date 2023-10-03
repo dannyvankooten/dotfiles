@@ -1,0 +1,59 @@
+#!/bin/bash
+REMOTE='mc4wp.com'
+APP_DIR='/home/mc4wp/my.mc4wp.com'
+
+# Publish plugin package to mc4wp.com server
+#
+# Usage: mc4wp-release $PACKAGE
+# Example: mc4wp-release plugin.zip
+#
+# This takes a .zip package and then does the following
+#
+# - Extracts plugin slug & version number from package
+#
+
+# Require at least 1 parameter: Package
+if [ "$#" -lt 1 ]; then
+    echo "1 parameters expected, $# found"
+    exit 1;
+fi
+
+# Find package
+PACKAGE=$1
+if [[ ! -e "$PACKAGE" ]] ; then
+	printf "Package $PACKAGE does not exist. \n\nRun wp-plugin-package on the Git folder to create it.\n";
+	exit 1;
+fi;
+
+if [[ ! "$PACKAGE" =~ \.zip$ ]]; then
+	printf "Package $PACKAGE does not look like a ZIP file.\n";
+	exit 1;
+fi;
+
+# Unzip to tmp location
+echo "Unzipping package."
+rm -rf /tmp/plugin
+unzip -o "$PACKAGE" -d /tmp/plugin > /dev/null
+cd /tmp/plugin/*
+
+# find name & version number
+NAME=${PWD##*/}
+VERSION=$(cat *.php | grep "^Version: \(.*\)" | tr ' ' '\n' | tail -1)
+
+if [[ -z "$VERSION" ]]; then
+	echo "Unable to find version number - is the package corrupt?"
+	exit 1;
+fi;
+
+# Print some info
+echo "Plugin: $NAME";
+echo "Version: $VERSION";
+printf "\nProceed? (y): "
+read CONFIRM
+if [ "$CONFIRM" != "y" ]; then
+	exit 1;
+fi;
+
+
+scp $PACKAGE "$REMOTE":"$APP_DIR/var/plugins/$NAME-$VERSION.zip"
+ssh -t "$REMOTE" "cd $APP_DIR && php bin/console app:plugins:update $NAME $VERSION"

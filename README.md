@@ -1,4 +1,4 @@
-My (Danny's) dotfiles. Using this on both Arch Linux (Lenovo Yoga Slim 7) and Debian 11 (Thinkpad X230).
+My (Danny's) dotfiles. I am using this on Debian 12 (bookworm) currently.
 
 ### Usage
 Run `./install.sh` to install.

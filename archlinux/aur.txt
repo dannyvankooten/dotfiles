@@ -1,8 +1,0 @@
-wlsunset
-spotify
-phpstorm
-phpstorm-jre
-evid
-swaync
-screamingfrogseospider
-todoist-appimage
