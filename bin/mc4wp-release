@@ -56,4 +56,4 @@ fi;
 
 
 scp $PACKAGE "$REMOTE":"$APP_DIR/var/plugins/$NAME-$VERSION.zip"
-ssh -t "$REMOTE" "cd $APP_DIR && php bin/console app:plugins:update $NAME $VERSION"
+ssh -t "$REMOTE" "cd $APP_DIR && php bin/console app:plugins:update $NAME --plugin-version=$VERSION"

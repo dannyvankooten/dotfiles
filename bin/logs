@@ -1,0 +1,37 @@
+#!/usr/bin/env bash 
+
+set -e 
+DATE=$(date +'%Y-%m-%d')
+TAIL_ARGS="-f --lines=100"
+
+function mc4wp () {
+    printf "\nMC4WP:\n===========\n"
+    LOGFILE="/var/www/my.mc4wp.com/var/log/prod-$DATE.log"
+    ssh mc4wp-ams1 "tail $LOGFILE $TAIL_ARGS"
+}
+
+function kokoanalytics () {
+    printf "\nkokoanalytics:\n=================\n"
+    ssh kokoanalytics-ams1 "tail pro.kokoanalytics.com/var/log/prod.log $TAIL_ARGS"
+}
+
+function htmlformsplugin () {
+    printf "\nhtmlformsplugin:\n===============\n"
+    ssh htmlformsplugin-ams1 "tail /var/www/my.htmlformsplugin.com/var/log/prod-$DATE.log $TAIL_ARGS"
+}
+
+function boxzillaplugin () {
+    printf "\nboxzillaplugin:\n================\n"
+    ssh boxzillaplugin-ams1 "tail /var/www/my.boxzillaplugin.com/var/log/prod-$DATE.log $TAIL_ARGS"
+}
+
+if [[ $1 == "all" ]]; then
+    TAIL_ARGS="--lines=10"
+    mc4wp
+    kokoanalytics
+    htmlformsplugin
+    boxzillaplugin
+else
+    $1 
+fi
+
