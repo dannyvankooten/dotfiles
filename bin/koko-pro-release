@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+
+REMOTE='kokoanalytics-ams1'
+REMOTE_APP_DIR='pro.kokoanalytics.com'
+VERSION=$1
+
+# Exit on errors
+set -e
+
+# Check if VERSION argument was supplied
+if [ "$#" -lt 1 ]; then
+    echo "1 parameters expected, $# found"
+    exit 1;
+fi
+
+wp-package koko-analytics-pro $VERSION ~/Code/releases
+scp ~/Code/releases/koko-analytics-pro-$VERSION.zip "$REMOTE":"$REMOTE_APP_DIR/var/koko-analytics-pro-$VERSION.zip"
+scp koko-analytics-pro/changelog.md "$REMOTE":"$REMOTE_APP_DIR/var/changelog.md"
+scp koko-analytics-pro/update-info.json "$REMOTE":"$REMOTE_APP_DIR/var/update-info.json"
+

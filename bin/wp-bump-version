@@ -43,6 +43,8 @@ foreach ($php_files as $file) {
 }
 
 replace_in_file('/"version": ?".+"/', sprintf('"version": "%s"', $version), 'info.json');
+replace_in_file('/"new_version": ?".+"/', sprintf('"new_version": "%s"', $version), 'update-info.json');
+replace_in_file('/"version": ?".+"/', sprintf('"version": "%s"', $version), 'update-info.json');
 
 if (file_exists('.git')) {
 	exec('git add readme.txt');

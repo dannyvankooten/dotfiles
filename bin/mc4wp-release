@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 REMOTE='mc4wp.com'
 APP_DIR='/home/mc4wp/my.mc4wp.com'
 
