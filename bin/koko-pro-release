@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-
+VERSION=$1
 REMOTE='kokoanalytics-ams1'
 REMOTE_APP_DIR='pro.kokoanalytics.com'
-VERSION=$1
+PLUGIN_DIR="koko-analytics-pro"
+PACKAGE_FILE="$PLUGIN_DIR-$VERSION.zip"
 
 # Exit on errors
 set -e
@@ -11,11 +12,55 @@ set -e
 # Check if VERSION argument was supplied
 if [ "$#" -lt 1 ]; then
     echo "1 parameters expected, $# found"
-    exit 1;
+    echo "Usage: koko-pro-release <VERSION>"
+    exit 1
 fi
 
-wp-package koko-analytics-pro $VERSION ~/Code/releases
-scp ~/Code/releases/koko-analytics-pro-$VERSION.zip "$REMOTE":"$REMOTE_APP_DIR/var/koko-analytics-pro-$VERSION.zip"
-scp koko-analytics-pro/changelog.md "$REMOTE":"$REMOTE_APP_DIR/var/changelog.md"
-scp koko-analytics-pro/update-info.json "$REMOTE":"$REMOTE_APP_DIR/var/update-info.json"
+# Check if we're inside plugin directory
+if [ ! -e "koko-analytics-pro.php" ]; then
+  echo "Plugin file not found. Please run this command from inside the koko-analytics-pro directory."
+  exit 1
+fi
 
+# Check if there are uncommitted changes
+if [ -n "$(git status --porcelain)" ]; then
+  echo "There are uncommitted changes. Please commit those changes before initiating a release."
+  exit 1
+fi
+
+# Build JS & CSS assets
+npm run build
+
+# Update version numbers in code
+sed -i "s/^Version: .*$/Version: $VERSION/g" koko-analytics-pro.php
+sed -i "s/define('\(.*_VERSION\)', '.*');/define('\1', '$VERSION');/g" koko-analytics-pro.php
+sed -i "s/\"\(\(new_\)\{0,1\}version\)\": \".*\"/\"\1\": \"$VERSION\"/g" update-info.json
+
+zip -r "$HOME/Code/releases/$PACKAGE_FILE" . \
+	-x ".*" \
+	-x "vendor/*" \
+	-x "node_modules/*" \
+	-x "tests" \
+	-x "webpack.config*.js" \
+  -x "*.json" \
+  -x "*.md" \
+	-x "*.lock" \
+	-x "*.xml" \
+	-x "assets/src/*"
+
+SIZE=$(stat --printf="%s" "$HOME/Code/releases/$PACKAGE_FILE")
+SIZE_MB=$(echo "$SIZE / 1000 / 1000" | bc)
+echo "$HOME/Code/releases/$PACKAGE_FILE created ($SIZE_MB MB)"
+
+scp "$HOME/Code/releases/$PACKAGE_FILE" "$REMOTE":"$REMOTE_APP_DIR/var/koko-analytics-pro-$VERSION.zip"
+scp "changelog.md" "$REMOTE":"$REMOTE_APP_DIR/var/changelog.md"
+scp "update-info.json" "$REMOTE":"$REMOTE_APP_DIR/var/update-info.json"
+
+# Create git tag
+git add . -A
+git commit -m "v$VERSION"
+git tag "$VERSION"
+
+# Push to git remote
+git push origin master
+git push origin "tags/$VERSION"
