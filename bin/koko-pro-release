@@ -4,7 +4,7 @@ VERSION=$1
 REMOTE='kokoanalytics-ams1'
 REMOTE_APP_DIR='pro.kokoanalytics.com'
 PLUGIN_DIR="koko-analytics-pro"
-PACKAGE_FILE="$PLUGIN_DIR-$VERSION.zip"
+PACKAGE_FILE="$HOME/Code/releases/$PLUGIN_DIR-$VERSION.zip"
 
 # Exit on errors
 set -e
@@ -28,6 +28,11 @@ if [ -n "$(git status --porcelain)" ]; then
   exit 1
 fi
 
+if [ -e "$PACKAGE_FILE" ]; then
+    echo "$PACKAGE_FILE exists. Deleting it."
+    rm "$PACKAGE_FILE"
+fi
+
 # Build JS & CSS assets
 npm run build
 
@@ -36,23 +41,29 @@ sed -i "s/^Version: .*$/Version: $VERSION/g" koko-analytics-pro.php
 sed -i "s/define('\(.*_VERSION\)', '.*');/define('\1', '$VERSION');/g" koko-analytics-pro.php
 sed -i "s/\"\(\(new_\)\{0,1\}version\)\": \".*\"/\"\1\": \"$VERSION\"/g" update-info.json
 
-zip -r "$HOME/Code/releases/$PACKAGE_FILE" . \
-	-x ".*" \
-	-x "vendor/*" \
-	-x "node_modules/*" \
-	-x "tests" \
-	-x "webpack.config*.js" \
-  -x "*.json" \
-  -x "*.md" \
-	-x "*.lock" \
-	-x "*.xml" \
-	-x "assets/src/*"
+# Move up one directory level because we need plugin directory in ZIP file
+cd ..
 
-SIZE=$(stat --printf="%s" "$HOME/Code/releases/$PACKAGE_FILE")
+zip -r "$PACKAGE_FILE" "$PLUGIN_DIR" \
+	-x "$PLUGIN_DIR/.*" \
+	-x "$PLUGIN_DIR/vendor/*" \
+	-x "$PLUGIN_DIR/node_modules/*" \
+	-x "$PLUGIN_DIR/tests" \
+	-x "$PLUGIN_DIR/webpack.config*.js" \
+  -x "$PLUGIN_DIR/*.json" \
+  -x "$PLUGIN_DIR/*.md" \
+	-x "$PLUGIN_DIR/*.lock" \
+	-x "$PLUGIN_DIR/*.xml" \
+	-x "$PLUGIN_DIR/assets/src/*"
+
+SIZE=$(stat --printf="%s" "$PACKAGE_FILE")
 SIZE_MB=$(echo "$SIZE / 1000 / 1000" | bc)
-echo "$HOME/Code/releases/$PACKAGE_FILE created ($SIZE_MB MB)"
+echo "$PACKAGE_FILE created ($SIZE_MB MB)"
 
-scp "$HOME/Code/releases/$PACKAGE_FILE" "$REMOTE":"$REMOTE_APP_DIR/var/koko-analytics-pro-$VERSION.zip"
+# Go back into plugin directory
+cd "$PLUGIN_DIR"
+
+scp "$PACKAGE_FILE" "$REMOTE":"$REMOTE_APP_DIR/var/koko-analytics-pro-$VERSION.zip"
 scp "changelog.md" "$REMOTE":"$REMOTE_APP_DIR/var/changelog.md"
 scp "update-info.json" "$REMOTE":"$REMOTE_APP_DIR/var/update-info.json"
 

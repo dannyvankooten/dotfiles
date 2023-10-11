@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 #
 # Bumps a version number
 # Usage: wp-bump-tested $VERSION (from plugin directory)
@@ -18,10 +20,7 @@ fi
 VERSION=$1
 
 # Bump version in readme.txt
-sed -i.bak "s/Tested up to: .*/Tested up to: $VERSION/g" readme.txt
-
-# Remove backup files
-rm *.bak
+sed -i "s/Tested up to: .*/Tested up to: $VERSION/g" readme.txt
 
 # Add change to Git
 if [[ -d ".git" ]]; then

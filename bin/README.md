@@ -24,7 +24,7 @@ wp-release-org ~/releases/mailchimp-for-wp-3.0.zip
 
 #### Bump version
 
-This bumps the version number in the main plugin file, `readme.txt` and `*.json`.
+This bumps the version number in the main plugin file, `readme.txt` and `info.json`.
 
 ```shell
 # wp-bump-version $VERSION
