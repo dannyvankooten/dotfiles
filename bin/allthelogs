@@ -1,5 +1,0 @@
-#!/bin/env bash 
-
-DATE=$(date +'%Y-%m-%d')
-multitail -s 2 -l 'ssh mc4wp-ams1 "tail -f /var/www/my.mc4wp.com/var/log/*.log --follow --lines=500"' -l 'ssh kokoanalytics-ams1 "tail pro.kokoanalytics.com/var/log/*.log --follow --lines=50"'
-

@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-set -e 
-
-while true; do 
-    make "$@"
-    inotifywait --quiet --recursive --event close_write .
-done

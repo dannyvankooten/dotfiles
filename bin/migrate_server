@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+DEST="dannyvankooten@rot1.dvk.co"
+DATABASES="kerkarchitect lisettewouters ricericebaby roundcubemail vankootenarchitecten vkpbouw_wp wp_vrijbuiter"
+
+echo "-- dumping databases"
+sudo mysqldump -p --single-transaction --extended-insert --quick --lock-tables=false --databases $DATABASES | gzip > databases.sql.gz
+
+echo "-- copying to $DEST"
+scp databases.sql.gz $DEST:databases.sql.gz
+
+echo "-- importing databases on $DEST"
+ssh -t $DEST "gunzip databases.sql.gz && sudo mysql < databases.sql"
+
+echo "-- migrating files"
+rsync -rulz --mkpath code $DEST:code
+rsync -rulz --mkpath /var/www/ $DEST:var/www
+rsync -rulz --mkpath /etc/wordpress/ $DEST:etc/wordpress
+rsync -rulz --mkpath /etc/nginx/sites-available/ $DEST:etc/nginx/sites-available
+rsync -rulz --mkpath /etc/nginx/sites-enabled/ $DEST:etc/nginx/sites-enabled
+rsync -rulz --mkpath /etc/nginx/global/ $DEST:etc/nginx/global
+rsync -rulz --mkpath /etc/letsencrypt/ $DEST:etc/letsencrypt
+rsync -rulz --mkpath /etc/systemd/system/dutchfirecalc.service $DEST:etc/systemd/system/dutchfirecalc.service
+ssh -t $DEST "sudo rsync -rulv var/ /var/"
+ssh -t $DEST "sudo rsync -rulv etc/ /etc/"
+
+echo "Done!"
+echo "Just a few things left for you though: "
+printf "\t - Test database connection. Ideally, create a new user per database.\n"
+printf "\t - Set-up cronjobs again\n"
