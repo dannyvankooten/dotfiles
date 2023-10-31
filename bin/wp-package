@@ -74,7 +74,8 @@ zip -r "/tmp/$PLUGIN_NAME.zip" $PLUGIN_DIRECTORY \
 	-x "$PLUGIN_DIRECTORY/build/*" \
 	-x "$PLUGIN_DIRECTORY/assets/src/*" \
 	-x "$PLUGIN_DIRECTORY/code-snippets/*" \
-	-x "$PLUGIN_DIRECTORY/sample-code-snippets/*"
+	-x "$PLUGIN_DIRECTORY/sample-code-snippets/*" \
+	-x "$PLUGIN_DIRECTORY/bin/*"
 
 # Move to destination directory
 mv "/tmp/$PLUGIN_NAME.zip" "$DEST"
