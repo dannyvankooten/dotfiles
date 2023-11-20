@@ -10,3 +10,6 @@ cp .gitconfig $HOME/.gitconfig
 cp -r .ssh $HOME/.ssh
 #cp -r .config/* $HOME/.config/
 cp .editorconfig $HOME/.editorconfig
+
+# Install packages 
+xargs sudo apt-get -y install < packages.txt
