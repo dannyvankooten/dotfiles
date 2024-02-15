@@ -1,4 +1,9 @@
-vim
+neovim
 subversion
-zip 
-git 
+zip
+tar
+git
+ffmpeg
+fzf
+clang
+
