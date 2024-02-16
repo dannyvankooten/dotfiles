@@ -19,7 +19,7 @@ vim.opt.wrap = false
 vim.o.updatetime = 200
 
 -- inline autocomplete menu
-vim.o.completeopt = 'menuone'
+vim.o.completeopt = 'menu,noselect'
 
 -- indentation
 vim.opt.tabstop = 4
@@ -50,7 +50,7 @@ vim.g.mapleader = " "
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]])
 
 -- fzf keybinds
-vim.keymap.set("n", "<c-P>", "<cmd>lua require('fzf-lua').files()<CR>", { silent = true })
+vim.keymap.set("n", "<c-P>", "<cmd>lua require('fzf-lua').git_files()<CR>", { silent = true })
 vim.keymap.set("n", "<c-\\>", "<cmd>lua require('fzf-lua').buffers()<CR>", { silent = true })
 vim.keymap.set("n", "<c-g>", "<cmd>lua require('fzf-lua').grep()<CR>", { silent = true })
 vim.keymap.set("n", "<c-l>", "<cmd>lua require('fzf-lua').live_grep()<CR>", { silent = true })
@@ -60,9 +60,9 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 -- Setup language servers.
 local lspconfig = require('lspconfig')
-require('lspconfig').clangd.setup{}
-require('lspconfig').pyright.setup{}
-require('lspconfig').rust_analyzer.setup{}
+lspconfig.clangd.setup{}
+lspconfig.pyright.setup{}
+lspconfig.rust_analyzer.setup {}
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -71,12 +71,15 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
+-- trigger omnifunc using <space><tab>
+vim.keymap.set('i', '<leader><tab>', vim.lsp.omnifunc)
+
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
-    -- Enable completion triggered by <c-x><c-o>
+    -- Enable completion triggered by <c-x><c-o> (or <leader><tab> in our case)
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
     -- Buffer local mappings.
