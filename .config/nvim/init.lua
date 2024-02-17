@@ -6,6 +6,11 @@ Plug("neovim/nvim-lspconfig")
 Plug("ibhagwan/fzf-lua")
 Plug('nvim-treesitter/nvim-treesitter', { ["do"] = ':TSUpdate' })
 Plug('mhartington/oceanic-next')
+Plug('hrsh7th/cmp-nvim-lsp')
+Plug('hrsh7th/cmp-buffer')
+Plug('hrsh7th/cmp-path')
+Plug('hrsh7th/cmp-cmdline')
+Plug('hrsh7th/nvim-cmp')
 vim.call('plug#end')
 
 -- config
@@ -19,7 +24,7 @@ vim.opt.wrap = false
 vim.o.updatetime = 200
 
 -- inline autocomplete menu
-vim.o.completeopt = 'menu,noselect'
+--vim.o.completeopt = 'menu,noselect'
 
 -- indentation
 vim.opt.tabstop = 4
@@ -57,12 +62,43 @@ vim.keymap.set("n", "<c-l>", "<cmd>lua require('fzf-lua').live_grep()<CR>", { si
 
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
+vim.keymap.set("n", "<F5>", "<cmd>!cargo run < input.txt<CR>")
+
+-- setup cmp
+local cmp = require('cmp')
+cmp.setup({
+     mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+    }, {
+      { name = 'buffer' },
+    })
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+        { name = 'path' }
+    }, {
+        { name = 'cmdline' }
+    })
+})
 
 -- Setup language servers.
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
 lspconfig.clangd.setup{}
 lspconfig.pyright.setup{}
-lspconfig.rust_analyzer.setup {}
+lspconfig.rust_analyzer.setup {
+    capabilities = capabilities
+}
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -71,8 +107,10 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
+
+
 -- trigger omnifunc using <space><tab>
-vim.keymap.set('i', '<leader><tab>', vim.lsp.omnifunc)
+--vim.keymap.set('i', '<leader><tab>', vim.lsp.omnifunc)
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -80,7 +118,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
     -- Enable completion triggered by <c-x><c-o> (or <leader><tab> in our case)
-    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+    --vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
