@@ -6,3 +6,5 @@ tar
 ffmpeg
 fzf
 xclip
+kitty
+

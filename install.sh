@@ -1,7 +1,10 @@
 #!/usr/bin/env sh
 
-# Copy vimrc
-cp .vimrc $HOME/.vimrc
+# Copy bash config file
+cp .bashrc ~/.bashrc
+
+# Ensure .env exist
+touch ~/.env
 
 # Copy git configuration
 cp .gitconfig $HOME/.gitconfig
