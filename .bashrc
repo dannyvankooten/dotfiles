@@ -1,3 +1,5 @@
+[ "$(tty)" = "/dev/tty1" ] && exec sway
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -82,3 +84,7 @@ alias aoccf="$CC -O2 -march=native -mtune=native -flto main.c -lcrypto && ./a.ou
 # Nvim in PATH
 export PATH="$PATH:/opt/nvim-linux64/bin"
 alias vim="nvim"
+
+# Set nvim as editor for lots of things
+export VISUAL=nvim
+export EDITOR="$VISUAL"
