@@ -19,14 +19,13 @@ set $term foot
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 set $menu dmenu_path | wmenu | xargs swaymsg exec --
-set $lock swaylock -f -i /home/danny/.config/sway/wallpaper-locked.jpg
+set $lock brightnessctl set 5% && swaylock -f -i /home/danny/.config/sway/wallpaper-locked.jpg
 
 #output HDMI-A-1 pos 1920 0
 #output eDP-1 pos 0 r
-
-input * xkb_layout "us,nl"
-input * xkb_options "grp:win_space_toggle"
-input "MANUFACTURER1 Keyboard" xkb_model "pc105"
+#input * xkb_layout "us,nl"
+#input * xkb_options "grp:win_space_toggle"
+#input "MANUFACTURER1 Keyboard" xkb_model "pc105"
 
 # disable laptop display output when lid is closed
 bindswitch --reload --locked lid:on output eDP-1 disable
@@ -40,6 +39,13 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+# Brightness controls
+bindsym XF86MonBrightnessUp exec brightnessctl set 20%+
+bindsym XF86MonBrightnessDown exec brightnessctl set 20%-
+
+# Properly set WAYLAND_DISPLAY so GTK applications boot up correctly (not slow)
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
 # Execute redshift equivalent (blue light filter)
 exec_always gammastep -l 51.8:5.8 -m wayland &
@@ -98,6 +104,8 @@ exec swayidle -w \
     # Change normal to inverse to use left mouse button for resizing and right
     # mouse button for dragging.
     floating_modifier $mod normal
+
+    bindsym Print exec grimshot copy area
 
     # Reload the configuration file
     bindsym $mod+Shift+c reload
@@ -230,20 +238,16 @@ bar {
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+    status_command /home/danny/.config/sway/a.out
+    #status_command while date +'%Y-%m-%d %X'; do sleep 1; done
 
     colors {
         statusline #ffffff
-        background #32323250
+        background #32323240
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
 
 include @sysconfdir@/sway/config.d/*
 
-# Brightness controls
-bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 
-# Properly set WAYLAND_DISPLAY so GTK applications boot up correctly (not slow)
-exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK

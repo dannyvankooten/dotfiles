@@ -10,19 +10,19 @@
 char buf[BUFSIZ];
 
 struct tuple {
-    int first;
-    int second;
+  int first;
+  int second;
 };
 
 typedef struct tuple tuple_t;
 
-int read_file(char *buf, char *filename) {
+int read_file(char buf[static BUFSIZ], char *filename) {
   FILE *fd = fopen(filename, "r");
   if (!fd) {
     return -1;
   }
 
-  size_t n = fread(buf, 1, BUFSIZ-1, fd);
+  size_t n = fread(buf, 1, BUFSIZ - 1, fd);
   buf[n] = 0;
 
   fclose(fd);
@@ -45,49 +45,98 @@ int get_battery_status(void) {
 }
 
 float get_cpu_load(void) {
-    if (!read_file(buf, "/proc/loadavg")) {
-        return 0;
-    }
+  if (!read_file(buf, "/proc/loadavg")) {
+    return 0;
+  }
 
-    float load = atof(buf);
-    return load * 100 / 16;
+  float load = atof(buf);
+  return load * 100 / 16;
 }
 
 tuple_t get_memory_info(void) {
-    if (!read_file(buf, "/proc/meminfo")) {
-        return (tuple_t) {0, 0};
-    }
+  if (!read_file(buf, "/proc/meminfo")) {
+    return (tuple_t){0, 0};
+  }
 
-    char *needle = "MemTotal:    ";
-    char *s = strstr(buf, needle);
-    if (!s) {
-        return (tuple_t) {0, 0};
-    }
-    s += strlen(needle);
-    int total = atoi(s);
+  char *needle = "MemTotal:    ";
+  char *s = strstr(buf, needle);
+  if (!s) {
+    return (tuple_t){0, 0};
+  }
+  s += strlen(needle);
+  int total = atoi(s);
 
-    needle = "MemFree:        ";
-    s = strstr(buf, needle);
-    if (!s) {
-        return (tuple_t) {0, 0};
-    }
-    s += strlen(needle);
-    int available = atoi(s);
-    return (tuple_t) {(total - available) / 1024, total / 1024};
+  needle = "MemFree:        ";
+  s = strstr(buf, needle);
+  if (!s) {
+    return (tuple_t){0, 0};
+  }
+  s += strlen(needle);
+  int available = atoi(s);
+  return (tuple_t){(total - available) / 1024, total / 1024};
+}
+
+int get_wifi_network_name(char *dst) {
+  FILE *pout = popen("nmcli -t -f \"GENERAL.CONNECTION\" d show wlp1s0", "r");
+  if (pout == NULL) {
+    return -1;
+  }
+
+  char buf[64];
+  fgets(buf, 64, pout);
+  int status = pclose(pout);
+  if (status != EXIT_SUCCESS) {
+    return -1;
+  }
+
+  char *s = memchr(buf, ':', 64);
+  if (!s) {
+    return -1;
+  }
+
+  s++; // skip ':'
+  if (*s == 0 || *s == '\n') {
+    strcpy(dst, "-");
+    return 0;
+  }
+
+  while (*s != 0 && *s != '\n') {
+    *dst++ = *s++;
+  }
+  *dst = 0;
+
+  return 0;
 }
 
 int main() {
   char time_fmt[64];
-
+  char ssid[64];
+  int battery;
+  char battery_status;
+  float cpu_load;
+  tuple_t memory_info;
+  unsigned t = 0;
   while (1) {
-    int battery = get_battery_level();
-    char battery_status = get_battery_status() == -1 ? '-' : '+';
-    float cpu_load = get_cpu_load();
-    tuple_t memory_info = get_memory_info();
+    // only fetch these stats once every 10s
+    if (t-- == 0) {
+        battery = get_battery_level();
+        battery_status = get_battery_status() == -1 ? '-' : '+';
+        cpu_load = get_cpu_load();
+        memory_info = get_memory_info();
+        get_wifi_network_name(ssid);
+        t = 10;
+    }
+
+    // time every second
     time_t now = time(NULL);
     strftime(time_fmt, 64, "%Y-%m-%d %X", localtime(&now));
-    printf("CPU %.0f%% | MEM %d / %d MB | BAT %d%%%c | %s\n", cpu_load, memory_info.first, memory_info.second, battery, battery_status, time_fmt);
+
+    // print & flush stdout
+    printf("WIFI %s | CPU %.0f%% | MEM %d / %d MB | BAT %d%%%c | %s\n", ssid,
+           cpu_load, memory_info.first, memory_info.second, battery,
+           battery_status, time_fmt);
     fflush(stdout);
+
     sleep(1);
   }
 }
