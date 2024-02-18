@@ -76,7 +76,7 @@ tuple_t get_memory_info(void) {
   return (tuple_t){(total - available) / 1024, total / 1024};
 }
 
-int get_wifi_network_name(char *dst) {
+int get_wifi_network_name(char dst[static 64]) {
   FILE *pout = popen("nmcli -t -f \"GENERAL.CONNECTION\" d show wlp1s0", "r");
   if (pout == NULL) {
     return -1;
@@ -95,15 +95,19 @@ int get_wifi_network_name(char *dst) {
   }
 
   s++; // skip ':'
+
   if (*s == 0 || *s == '\n') {
     strcpy(dst, "-");
     return 0;
   }
 
-  while (*s != 0 && *s != '\n') {
-    *dst++ = *s++;
+
+  // copy until newline, at most 63 chars
+  unsigned l = 0;
+  while (*s != 0 && *s != '\n' && l < 63) {
+    dst[l++] = *s++;
   }
-  *dst = 0;
+  dst[l] = 0;
 
   return 0;
 }
@@ -116,25 +120,26 @@ int main() {
   float cpu_load;
   tuple_t memory_info;
   unsigned t = 0;
+
   while (1) {
     // only fetch these stats once every 10s
     if (t-- == 0) {
-        battery = get_battery_level();
-        battery_status = get_battery_status() == -1 ? '-' : '+';
-        cpu_load = get_cpu_load();
-        memory_info = get_memory_info();
-        get_wifi_network_name(ssid);
-        t = 10;
+      battery = get_battery_level();
+      battery_status = get_battery_status() == -1 ? '-' : '+';
+      cpu_load = get_cpu_load();
+      memory_info = get_memory_info();
+      get_wifi_network_name(ssid);
+      t = 10;
     }
 
-    // time every second
+    // time every second
     time_t now = time(NULL);
     strftime(time_fmt, 64, "%Y-%m-%d %X", localtime(&now));
 
     // print & flush stdout
-    printf("WIFI %s | CPU %.0f%% | MEM %d / %d MB | BAT %d%%%c | %s\n", ssid,
+    printf("WIFI %s | CPU %.0f%% | MEM %d / %d MB | BAT %d%% %c%c | %s\n", ssid,
            cpu_load, memory_info.first, memory_info.second, battery,
-           battery_status, time_fmt);
+           battery_status, battery_status, time_fmt);
     fflush(stdout);
 
     sleep(1);
