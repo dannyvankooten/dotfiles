@@ -32,3 +32,5 @@ sublime-text
 wayland-protocols
 wget
 wl-clipboard
+zathura
+grimshot
