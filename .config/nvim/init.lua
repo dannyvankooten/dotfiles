@@ -27,7 +27,7 @@ vim.opt.wrap = false
 vim.o.updatetime = 200
 
 -- inline autocomplete menu
---vim.o.completeopt = 'menu,noselect'
+vim.o.completeopt = 'menuone,noselect'
 
 -- indentation
 vim.opt.tabstop = 4
@@ -66,6 +66,15 @@ vim.keymap.set("n", "<c-l>", "<cmd>lua require('fzf-lua').live_grep()<CR>", { si
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set("n", "<F5>", "<cmd>!cargo run < input.txt<CR>")
+
+vim.keymap.set({ "i", "s" }, "<tab>", function()
+  if vim.fn["vsnip#jumpable"](1) == 1 then
+    return '<plug>(vsnip-jump-next)'
+  else
+    return "<tab>"
+  end
+end, { expr = true, remap = true })
+
 
 -- setup cmp
 local cmp = require('cmp')
