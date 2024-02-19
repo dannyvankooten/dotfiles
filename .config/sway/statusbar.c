@@ -58,7 +58,7 @@ tuple_t get_memory_info(void) {
     return (tuple_t){0, 0};
   }
 
-  char *needle = "MemTotal:    ";
+  char *needle = "MemTotal:";
   char *s = strstr(buf, needle);
   if (!s) {
     return (tuple_t){0, 0};
@@ -66,7 +66,7 @@ tuple_t get_memory_info(void) {
   s += strlen(needle);
   int total = atoi(s);
 
-  needle = "MemFree:        ";
+  needle = "MemAvailable:";
   s = strstr(buf, needle);
   if (!s) {
     return (tuple_t){0, 0};
