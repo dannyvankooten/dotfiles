@@ -65,10 +65,9 @@ if ! shopt -oq posix; then
 fi
 
 export PATH="$PATH:/home/danny/.local/bin"
-alias clion="/opt/clion-2023.2.2/bin/clion.sh"
+export PATH="$PATH:/home/danny/go/bin"
 export CXX="$HOME/gcc-13.2.0/bin/g++"
 export CC="$HOME/gcc-13.2.0/bin/gcc"
-
 source "$HOME/.cargo/env"
 source "$HOME/.env"
 
@@ -88,3 +87,19 @@ alias vim="nvim"
 # Set nvim as editor for lots of things
 export VISUAL=nvim
 export EDITOR="$VISUAL"
+
+osc7_cwd() {
+    local strlen=${#PWD}
+    local encoded=""
+    local pos c o
+    for (( pos=0; pos<strlen; pos++ )); do
+        c=${PWD:$pos:1}
+        case "$c" in
+            [-/:_.!\'\(\)~[:alnum:]] ) o="${c}" ;;
+            * ) printf -v o '%%%02X' "'${c}" ;;
+        esac
+        encoded+="${o}"
+    done
+    printf '\e]7;file://%s%s\e\\' "${HOSTNAME}" "${encoded}"
+}
+PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }osc7_cwd
