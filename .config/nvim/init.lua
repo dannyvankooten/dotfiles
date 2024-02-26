@@ -12,8 +12,9 @@ Plug('hrsh7th/cmp-path')
 Plug('hrsh7th/cmp-cmdline')
 Plug('hrsh7th/cmp-nvim-lsp-signature-help')
 Plug('hrsh7th/nvim-cmp')
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
+Plug('hrsh7th/cmp-vsnip')
+Plug('hrsh7th/vim-vsnip')
+Plug('numToStr/Comment.nvim')
 vim.call('plug#end')
 
 -- config
@@ -58,15 +59,15 @@ vim.g.mapleader = " "
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]])
 
 -- fzf keybinds
-vim.keymap.set("n", "<c-P>", "<cmd>lua if not require('fzf-lua').git_files() then require('fzf-lua').files() end <CR>", { silent = true })
-vim.keymap.set("n", "<c-\\>", "<cmd>lua require('fzf-lua').buffers()<CR>", { silent = true })
-vim.keymap.set("n", "<c-g>", "<cmd>lua require('fzf-lua').grep()<CR>", { silent = true })
-vim.keymap.set("n", "<c-l>", "<cmd>lua require('fzf-lua').live_grep()<CR>", { silent = true })
+--vim.keymap.set("n", "<c-[>", "<cmd>lua require('fzf-lua').files()<CR>", { silent = true })
+vim.keymap.set("n", "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", { silent = true })
+vim.keymap.set("n", "<leader>fgf", "<cmd>lua require('fzf-lua').git_files()<CR>", { silent = true })
+vim.keymap.set("n", "<leader>fb", "<cmd>lua require('fzf-lua').buffers()<CR>", { silent = true })
+vim.keymap.set("n", "<leader>fc", "<cmd>lua require('fzf-lua').live_grep()<CR>", { silent = true })
 
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [["+Y]])
-vim.keymap.set("n", "<F5>", "<cmd>!cargo run < input.txt<CR>")
 
+-- tab to cycle through vsnip snippets
 vim.keymap.set({ "i", "s" }, "<tab>", function()
   if vim.fn["vsnip#jumpable"](1) == 1 then
     return '<plug>(vsnip-jump-next)'
@@ -194,3 +195,5 @@ require'nvim-treesitter.configs'.setup {
         additional_vim_regex_highlighting = false,
     },
 }
+
+require('Comment').setup()
