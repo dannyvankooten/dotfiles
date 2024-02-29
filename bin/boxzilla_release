@@ -79,7 +79,7 @@ scp "$PACKAGE_FILE" "$REMOTE":"$REMOTE_APP_DIR/var/plugins/$PLUGIN_DIR-$VERSION.
 
 # Update version on production server
 echo "Updating plugin version on production server"
-ssh -t "$REMOTE" "cd $REMOTE_APP_DIR && bin/console app:plugins:update $PLUGIN_DIR --plugin-version=\"$PLUGIN_VERSION\""
+ssh -t "$REMOTE" "cd $REMOTE_APP_DIR && bin/console app:plugins:update $PLUGIN_DIR --plugin-version=\"$VERSION\""
 
 # Create git tag
 git add . -A

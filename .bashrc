@@ -30,7 +30,7 @@ PS1='\[\033[01;34m\]\w\[\033[00m\] > '
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
+xterm*|rxvt*|foot)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
 *)
@@ -64,6 +64,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
+export PATH="$PATH:/home/danny/Code/dotfiles/bin"
 export PATH="$PATH:/home/danny/.local/bin"
 export PATH="$PATH:/home/danny/go/bin"
 export CXX="$HOME/gcc-13.2.0/bin/g++"
@@ -103,3 +104,7 @@ osc7_cwd() {
     printf '\e]7;file://%s%s\e\\' "${HOSTNAME}" "${encoded}"
 }
 PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }osc7_cwd
+
+alias calc="bc -l"
+
+
