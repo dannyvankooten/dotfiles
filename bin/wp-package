@@ -30,6 +30,11 @@ if [[ ! -d "$PLUGIN_DIRECTORY"  ]]; then
 	exit 1;
 fi;
 
+if [[ $(basename $PWD) != 'plugisns' ]]; then
+    echo "Please call wp-package from the wp-content/plugins directory only";
+    exit 1;
+fi
+
 # Traverse into plugin directory
 cd $PLUGIN_DIRECTORY
 PLUGIN_NAME=${PWD##*/}

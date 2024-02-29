@@ -22,7 +22,7 @@ if ($argc < 2) {
 $version = $argv[1];
 
 function replace_in_file($search, $replace, $file) {
-    if (false === file_exists($file)) {
+    if (! file_exists($file)) {
         return;
     }
 
@@ -47,7 +47,9 @@ replace_in_file('/"new_version": ?".+"/', sprintf('"new_version": "%s"', $versio
 replace_in_file('/"version": ?".+"/', sprintf('"version": "%s"', $version), 'update-info.json');
 
 if (file_exists('.git')) {
-	exec('git add readme.txt');
+    if (file_exists('readme.txt')) {
+        exec('git add readme.txt');
+    }
 	if (file_exists('info.json')) {
 		exec('git add info.json');
 	}
