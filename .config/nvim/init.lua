@@ -5,7 +5,6 @@ vim.call('plug#begin')
 Plug("neovim/nvim-lspconfig")
 Plug("ibhagwan/fzf-lua")
 Plug('nvim-treesitter/nvim-treesitter', { ["do"] = ':TSUpdate' })
-Plug('mhartington/oceanic-next')
 Plug('hrsh7th/cmp-nvim-lsp')
 Plug('hrsh7th/cmp-buffer')
 Plug('hrsh7th/cmp-path')
@@ -21,11 +20,8 @@ vim.call('plug#end')
 vim.wo.number = true
 vim.wo.relativenumber = true
 
--- disable automatic line wrapping
-vim.opt.wrap = false
-
 -- Decrease update time
-vim.o.updatetime = 200
+vim.o.updatetime = 100
 
 -- inline autocomplete menu
 vim.o.completeopt = 'menuone,noselect'
@@ -43,7 +39,7 @@ vim.opt.incsearch = true
 
 -- term gui colors
 vim.opt.termguicolors = true
-vim.cmd('colorscheme OceanicNext')
+vim.cmd('colorscheme habamax')
 
 -- keep space between cursor and bottom/top of screen
 vim.opt.scrolloff = 8
@@ -75,7 +71,6 @@ vim.keymap.set({ "i", "s" }, "<tab>", function()
     return "<tab>"
   end
 end, { expr = true, remap = true })
-
 
 -- setup cmp
 local cmp = require('cmp')
