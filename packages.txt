@@ -37,3 +37,4 @@ zathura
 grimshot
 mako-notifier
 tree
+swaylock
