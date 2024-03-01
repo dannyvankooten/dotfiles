@@ -36,3 +36,4 @@ wl-clipboard
 zathura
 grimshot
 mako-notifier
+tree
