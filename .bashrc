@@ -107,4 +107,15 @@ PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }osc7_cwd
 
 alias calc="bc -l"
 
+# Always enable warnings from -Wall and -Wextra
+export CFLAGS="-Wall -Wextra -Wvla -Wformat -Wformat=2"
+export CXXFLAGS="-Wall -Wextra -Weffc++"
 
+# Let CMake always dump compile_commands.json (for Clangd)
+export CMAKE_EXPORT_COMPILE_COMMANDS="ON"
+
+# capture the output of a command so it can be retrieved with ret
+cap () { tee /tmp/capture.out; }
+
+# return the output of the most recent command that was captured by cap
+ret () { cat /tmp/capture.out; }
