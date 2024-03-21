@@ -64,31 +64,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH="$PATH:/home/danny/Code/dotfiles/bin"
-export PATH="$PATH:/home/danny/.local/bin"
-export PATH="$PATH:/home/danny/go/bin"
-export CXX="$HOME/gcc-13.2.0/bin/g++"
-export CC="$HOME/gcc-13.2.0/bin/gcc"
-source "$HOME/.cargo/env"
-source "$HOME/.env"
-
-# Advent of Code shortcuts
-aocmake () {
-    make $1 && cat "${2:-$1.txt}" | ./$1
-}
-export aocmake
-
-alias aocc="$CC-17 -g -Wall -Wextra -Wpedantic -Wshadow -Wfloat-equal -Wswitch-enum -Wconversion -Wunreachable-code -fsanitize=undefined -fsanitize=address -Wformat=2 -O2 main.c -lcrypto && ./a.out"
-alias aoccf="$CC -O2 -march=native -mtune=native -flto main.c -lcrypto && ./a.out"
-
-# Nvim in PATH
-export PATH="$PATH:/opt/nvim-linux64/bin"
-alias vim="nvim"
-
-# Set nvim as editor for lots of things
-export VISUAL=nvim
-export EDITOR="$VISUAL"
-
 osc7_cwd() {
     local strlen=${#PWD}
     local encoded=""
@@ -103,8 +78,52 @@ osc7_cwd() {
     done
     printf '\e]7;file://%s%s\e\\' "${HOSTNAME}" "${encoded}"
 }
+
 PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }osc7_cwd
+
+export PATH="$PATH:/home/danny/Code/dotfiles/bin"
+export PATH="$PATH:/home/danny/.local/bin"
+export PATH="$PATH:/home/danny/go/bin"
+#export CXX="$HOME/gcc-13.2.0/bin/g++"
+#export CC="$HOME/gcc-13.2.0/bin/gcc"
+
+if [[ -d "$HOME/.cargo" ]]; then
+    source "$HOME/.cargo/env"
+fi
+source "$HOME/.env"
+
+# Advent of Code shortcuts
+aocmake () {
+    make $1 && cat "${2:-$1.txt}" | ./$1
+}
+export aocmake
+
+alias aocc="$CC -g -Wall -Wextra -Wpedantic -Wshadow -Wfloat-equal -Wswitch-enum -Wconversion -Wunreachable-code -fsanitize=undefined -fsanitize=address -Wformat=2 -O2 main.c -lcrypto && ./a.out"
+alias aoccf="$CC -O2 -march=native -mtune=native -flto main.c -lcrypto && ./a.out"
+
+# Nvim in PATH
+export PATH="$PATH:/opt/nvim-linux64/bin"
+alias vim="nvim"
+
+# Set nvim as editor for lots of things
+export VISUAL=nvim
+export EDITOR="$VISUAL"
 
 alias calc="bc -l"
 
+# Default to Clang18 as C / C++ compiler
+export CC="clang-18"
+export CXX="clang++-18"
 
+# Always compile with these flags
+export CFLAGS="-Wall -Wextra -Wformat -Wformat=2 -Wvla -g -fno-omit-frame-pointer"
+export CXXFLAGS="-Wall -Wextra -g -fno-omit-frame-pointer"
+
+# Use mold as linker
+export LDFLAGS="-fuse-ld=mold"
+
+# Configure Address Sanitier w/ some stricter checks
+export ASAN_OPTIONS="strict_string_checks=1:strict_memcmp=1:quarantine_size_mb=512:detect_stack_use_after_return=1:check_initialization_order=1"
+
+# Configure UBSan with some stricter checks
+export UBSAN_OPTIONS="print_stacktrace=1"
