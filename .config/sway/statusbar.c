@@ -3,11 +3,12 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
+#include <errno.h>
 
 #undef BUFSIZ
 #define BUFSIZ 1024
 
-char buf[BUFSIZ];
+char buf[BUFSIZ] = {0};
 
 struct tuple {
   int first;
@@ -16,7 +17,7 @@ struct tuple {
 
 typedef struct tuple tuple_t;
 
-int read_file(char buf[static BUFSIZ], char *filename) {
+static int read_file(char buf[static BUFSIZ], char *filename) {
   FILE *fd = fopen(filename, "r");
   if (!fd) {
     return -1;
@@ -29,31 +30,36 @@ int read_file(char buf[static BUFSIZ], char *filename) {
   return 1;
 }
 
-int get_battery_level(void) {
-  if (!read_file(buf, "/sys/class/power_supply/BAT1/capacity")) {
+static int get_battery_level(void) {
+  if (!read_file(buf, "/sys/class/power_supply/BAT0/capacity")) {
     return 0;
   }
   int battery_lvl = atoi(buf);
   return battery_lvl;
 }
 
-int get_battery_status(void) {
-  if (!read_file(buf, "/sys/class/power_supply/BAT1/status")) {
+static int get_battery_status(void) {
+  if (!read_file(buf, "/sys/class/power_supply/BAT0/status")) {
     return 0;
   }
   return buf[0] == 'D' ? -1 : 1;
 }
 
-float get_cpu_load(void) {
+static float get_cpu_load(void) {
   if (!read_file(buf, "/proc/loadavg")) {
     return 0;
   }
 
-  float load = atof(buf);
-  return load * 100 / 16;
+  errno = 0;
+  float load = strtof(buf, NULL);
+  if (errno != 0) {
+    return 0.00;
+  }
+
+  return load * 100.0 / 16.0;
 }
 
-tuple_t get_memory_info(void) {
+static tuple_t get_memory_info(void) {
   if (!read_file(buf, "/proc/meminfo")) {
     return (tuple_t){0, 0};
   }
@@ -76,13 +82,13 @@ tuple_t get_memory_info(void) {
   return (tuple_t){(total - available) / 1024, total / 1024};
 }
 
-int get_wifi_network_name(char dst[static 64]) {
-  FILE *pout = popen("nmcli -t -f \"GENERAL.CONNECTION\" d show wlp1s0", "r");
+static int get_wifi_network_name(char dst[static 64]) {
+  FILE *pout = popen("nmcli -t -f \"GENERAL.CONNECTION\" device show", "r");
   if (pout == NULL) {
     return -1;
   }
 
-  char buf[64];
+  char buf[64] = {0};
   fgets(buf, 64, pout);
   int status = pclose(pout);
   if (status != EXIT_SUCCESS) {
@@ -107,14 +113,14 @@ int get_wifi_network_name(char dst[static 64]) {
   while (*s != 0 && *s != '\n' && l < 63) {
     dst[l++] = *s++;
   }
-  dst[l] = 0;
+  dst[l] = '\0';
 
   return 0;
 }
 
 int main() {
-  char time_fmt[64];
-  char ssid[64];
+  char time_fmt[64] = {0};
+  char ssid[64] = {0};
   int battery;
   char battery_status;
   float cpu_load;

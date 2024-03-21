@@ -127,3 +127,12 @@ export ASAN_OPTIONS="strict_string_checks=1:strict_memcmp=1:quarantine_size_mb=5
 
 # Configure UBSan with some stricter checks
 export UBSAN_OPTIONS="print_stacktrace=1"
+
+# Let CMake always dump compile_commands.json (for Clangd)
+export CMAKE_EXPORT_COMPILE_COMMANDS="ON"
+
+# capture the output of a command so it can be retrieved with ret
+cap () { tee /tmp/capture.out; }
+
+# return the output of the most recent command that was captured by cap
+ret () { cat /tmp/capture.out; }

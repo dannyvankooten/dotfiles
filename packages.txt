@@ -1,4 +1,6 @@
 git
+curl
+vim
 subversion
 firefox-esr
 zip
@@ -28,10 +30,11 @@ grep
 gzip
 htop
 hyperfine
-sublime-text
 wayland-protocols
 wget
 wl-clipboard
 zathura
 grimshot
 mako-notifier
+tree
+swaylock
