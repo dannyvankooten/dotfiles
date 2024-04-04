@@ -1,0 +1,15 @@
+{
+	"ignored_packages":
+	[
+		"Vintage",
+	],
+	"color_scheme": "Mariana.sublime-color-scheme",
+	"highlight_line": true,	
+	"always_show_minimap_viewport": true,
+	"shift_tab_unindent": true,
+	"index_files": true,
+	"theme": "Default Dark.sublime-theme",
+	"ensure_newline_at_eof_on_save": true,
+	"font_size": 11,
+	"update_check": true,
+}

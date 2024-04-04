@@ -1,3 +1,11 @@
 [user]
-	email = dannyvankooten@users.noreply.github.com
+	email = hi@dvk.co
 	name = Danny van Kooten
+	signingKey = BC0FD096EDFC1DD8
+[init]
+	defaultBranch = main
+[core]
+	editor = nvim
+	excludesfile = /home/danny/.gitignore
+[commit]
+	gpgsign = true

@@ -1,0 +1,7 @@
+CompileFlags:
+  Add: [ -Wall, -Wextra, -Wunused, -Wpedantic, -Wformat, -Wformat=2, -std=c++17 ]
+Diagnostics:
+  ClangTidy:
+    Add: [ "modernize-*", "cppcoreguidelines-*", "bugprone-*" ]
+    Remove: [ modernize-use-trailing-return-type ]
+

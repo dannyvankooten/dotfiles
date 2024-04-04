@@ -1,0 +1,10 @@
+// Settings in here override those in "LSP-clangd/LSP-clangd.sublime-settings"
+{
+  "binary": "clangd-18",
+  "initializationOptions": {
+    "clangd.clang-tidy": true,
+    "clangd.background-index": true,
+    "clangd.header-insertion": "iwyu",
+    "clangd.completion-style": "detailed",
+  }
+}

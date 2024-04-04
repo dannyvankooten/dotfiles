@@ -1,2 +1,7 @@
+.vscode
+build-debug
+build-release
 .idea
-.config/sway/a.out
+npm-debug.log
+.env
+

@@ -20,9 +20,17 @@ foreach( $files as $file ) {
 $changelog = file_get_contents('CHANGELOG.md');
 
 // remove first 2 lines (heading)
-$changelog = explode( PHP_EOL, $changelog );
-$changelog = array_slice( $changelog, 2 );
-$changelog = join( PHP_EOL, $changelog );
+$changelog = explode(PHP_EOL, $changelog);
+$changelog = array_slice($changelog, 2);
+$changelog = join(PHP_EOL, $changelog);
+
+// limit changelog to 5000 words
+$changelog_words = explode(' ', $changelog);
+if (count($changelog_words) > 4096) {
+    $changelog_words = array_slice($changelog_words, 0, 4096);
+    $changelog_words[] = "..." . PHP_EOL;
+}
+$changelog = join(' ', $changelog_words);
 
 // add padding
 $changelog =  PHP_EOL . $changelog . PHP_EOL;
